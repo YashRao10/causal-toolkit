@@ -1,0 +1,10 @@
+{
+  "key": "tsla_earnings_miss_auto_peers",
+  "title": "Did TSLA's Jul 22 earnings miss actually break it from auto/EV peers?",
+  "description": "Treated: TSLA. Donors: F, GM, RIVN (traditional + EV auto peers) \u2014 hand-picked, not algorithmic. Treatment date is the Jul 22 earnings report (auto gross margins 16.3% vs 18.4% expected, EPS $0.33 vs $0.55 consensus, FCF went negative on AI/robotics capex). Tests whether the post-earnings selloff is a real, company-specific fundamentals break from the auto sector, or whether TSLA was already diverging from these peers beforehand for unrelated reasons. Result: fails the fit-quality gate \u2014 see tsla_earnings_miss_growth_peers for the follow-up with a different donor pool.",
+  "treated": "TSLA",
+  "generated_at": "2026-07-27 07:38 UTC",
+  "generated_at_iso": "2026-07-27T07:38:24.345961+00:00",
+  "badge_class": "bad-fit",
+  "badge_label": "Fit too poor to trust"
+}

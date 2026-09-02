@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>TSLA's Jul 22 earnings miss, re-tested against high-beta growth peers instead of automakers</title>
+<style>
+  /* Dark is the unconditional default look for this report (not OS-driven) —
+     light is available only via an explicit data-theme="light" override. */
+  :root { color-scheme: dark; }
+  body {
+    margin:0; font-family: system-ui,-apple-system,"Segoe UI",sans-serif;
+    background:#0d0d0d; color:#ffffff;
+  }
+  :root[data-theme="light"] body { background:#f9f9f7; color:#0b0b0b; }
+
+  .wrap { max-width: 920px; margin: 0 auto; padding: 32px 20px 60px; }
+  h1 { font-size: 22px; margin: 0 0 6px; }
+  .subtitle { color:#c3c2b7; font-size: 14px; margin-bottom: 24px; }
+  :root[data-theme="light"] .subtitle { color:#52514e; }
+
+  .card {
+    background:#1a1a19; border:1px solid rgba(255,255,255,0.10); border-radius:10px;
+    padding:20px 24px; margin-bottom:20px;
+  }
+  :root[data-theme="light"] .card { background:#fcfcfb; border-color: rgba(11,11,11,0.10); }
+
+  .card h2 { font-size: 15px; text-transform: uppercase; letter-spacing: 0.5px;
+    color:#c3c2b7; margin: 0 0 14px; }
+  :root[data-theme="light"] .card h2 { color:#52514e; }
+
+  .viz-root {
+    --surface-1:#1a1a19; --text-primary:#ffffff; --text-secondary:#c3c2b7;
+    --text-muted:#898781; --grid:#2c2c2a; --baseline:#383835;
+    --series-1:#3987e5; --series-2:#d95926;
+  }
+  :root[data-theme="light"] .viz-root {
+    --surface-1:#fcfcfb; --text-primary:#0b0b0b; --text-secondary:#52514e;
+    --text-muted:#898781; --grid:#e1e0d9; --baseline:#c3c2b7;
+    --series-1:#2a78d6; --series-2:#eb6834;
+  }
+
+  .gridline { stroke: var(--grid); stroke-width: 1; }
+  .axis { stroke: var(--baseline); stroke-width: 1; }
+  .tick { fill: var(--text-muted); font-size: 11px; }
+  .line-actual { stroke: var(--series-1); stroke-width: 2; }
+  .line-synth { stroke: var(--series-2); stroke-width: 2; }
+  .end-dot { stroke: var(--surface-1); stroke-width: 2; }
+  .dot-actual { fill: var(--series-1); }
+  .dot-synth { fill: var(--series-2); }
+  .end-label { font-size: 12px; fill: var(--text-secondary); }
+  .treatment-line { stroke: var(--text-muted); stroke-width: 1; stroke-dasharray: 3 3; }
+  .treatment-label { font-size: 11px; fill: var(--text-muted); }
+  .confound-band { fill: var(--text-muted); opacity: 0.08; }
+  .crosshair { stroke: var(--text-muted); stroke-width: 1; pointer-events:none; }
+
+  .legend { display:flex; gap:18px; padding: 6px 0 0 56px; font-size: 13px;
+    color: var(--text-secondary); }
+  .legend-item { display:flex; align-items:center; gap:6px; }
+  .swatch { width:10px; height:10px; border-radius:2px; display:inline-block; }
+  .swatch-actual { background: var(--series-1); }
+  .swatch-synth { background: var(--series-2); }
+
+  .tooltip {
+    position:absolute; background: var(--surface-1); border:1px solid rgba(255,255,255,0.10);
+    border-radius:6px; padding:8px 10px; font-size:12px; pointer-events:none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4); color: var(--text-primary);
+  }
+  :root[data-theme="light"] .tooltip {
+    border-color: rgba(11,11,11,0.10); box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  }
+  .tooltip .t-date { color: var(--text-secondary); margin-bottom:4px; }
+  .tooltip .t-row { display:flex; justify-content:space-between; gap:16px; }
+
+  table.placebo-table { width:100%; border-collapse: collapse; font-size: 13px; }
+  table.placebo-table th, table.placebo-table td {
+    padding: 7px 10px; text-align:left; border-bottom: 1px solid #2c2c2a;
+    font-variant-numeric: tabular-nums; color: inherit;
+  }
+  :root[data-theme="light"] table.placebo-table th,
+  :root[data-theme="light"] table.placebo-table td { border-bottom-color: #e1e0d9; }
+  table.placebo-table td.num { text-align: right; }
+  table.placebo-table th { color:#898781; font-size:11px; text-transform:uppercase;
+    letter-spacing:0.5px; }
+  tr.row-treated { font-weight: 600; }
+
+  .verdict { font-size: 14px; line-height: 1.6; }
+  .kv { display:grid; grid-template-columns: 1fr 1fr; gap: 10px 24px; font-size: 13px; }
+  .kv div span.k { color:#c3c2b7; display:block; font-size:11px;
+    text-transform:uppercase; letter-spacing:0.5px; }
+  :root[data-theme="light"] .kv div span.k { color:#52514e; }
+
+  .footer { color:#898781; font-size: 11px; margin-top: 32px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>TSLA's Jul 22 earnings miss, re-tested against high-beta growth peers instead of automakers</h1>
+  <div class="subtitle">Follow-up to tsla_earnings_miss_auto_peers, which failed the fit-quality gate — pure Detroit automakers (F, GM) don't move with TSLA day-to-day at all. Treated: TSLA. Donors: RIVN, LCID (EV-specific, still auto but more growth-multiple-priced than F/GM), PLTR, COIN (retail-favorite high-beta momentum names with no automotive exposure, included on the theory that TSLA trades more on 'high-beta retail-momentum growth' factor exposure than on 'automaker' exposure most days). Same Jul 22 earnings-miss treatment date. Result: improved (relative RMSE 1.29x, down from 1.78x with pure automakers) but still fails the fit-quality gate — TSLA doesn't reconstruct cleanly from either peer group tried so far. Read as: TSLA is genuinely idiosyncratic (Musk/narrative -driven) rather than a donor-pool-selection failure specifically — a case where the honest answer is 'this method can't cleanly isolate an effect here,' not a forced conclusion either way.</div>
+
+  <div class="card">
+    <h2>Actual vs. synthetic counterfactual</h2>
+    
+<div class="viz-root">
+  <svg viewBox="0 0 860 380" width="100%" height="380" id="chart-svg">
+    
+    <line class="gridline" x1="56" y1="340.0" x2="784" y2="340.0"/><text class="tick" x="48" y="340.0" text-anchor="end" dominant-baseline="middle">69</text><line class="gridline" x1="56" y1="261.0" x2="784" y2="261.0"/><text class="tick" x="48" y="261.0" text-anchor="end" dominant-baseline="middle">77</text><line class="gridline" x1="56" y1="182.0" x2="784" y2="182.0"/><text class="tick" x="48" y="182.0" text-anchor="end" dominant-baseline="middle">86</text><line class="gridline" x1="56" y1="103.0" x2="784" y2="103.0"/><text class="tick" x="48" y="103.0" text-anchor="end" dominant-baseline="middle">94</text><line class="gridline" x1="56" y1="24.0" x2="784" y2="24.0"/><text class="tick" x="48" y="24.0" text-anchor="end" dominant-baseline="middle">102</text>
+    <line class="axis" x1="56" y1="340"
+          x2="784" y2="340"/>
+    <line class="treatment-line" x1="780.0" y1="24" x2="780.0" y2="340"/><text class="treatment-label" x="780.0" y="16" text-anchor="middle">Treatment date</text>
+    <path class="line-synth" d="M56.00,45.79 L60.00,59.29 L72.00,71.99 L76.00,90.44 L80.00,104.78 L84.00,126.60 L88.00,150.38 L100.00,166.46 L104.00,165.67 L108.00,205.13 L112.00,264.87 L116.00,203.30 L128.00,194.36 L132.00,198.12 L136.00,220.99 L140.00,265.82 L144.00,133.39 L160.00,162.00 L164.00,170.09 L168.00,182.77 L172.00,183.28 L184.00,212.53 L188.00,208.12 L192.00,167.85 L196.00,160.16 L200.00,173.06 L212.00,158.42 L216.00,157.42 L220.00,118.07 L224.00,116.09 L228.00,117.34 L240.00,101.65 L244.00,95.31 L248.00,88.95 L252.00,129.29 L256.00,140.88 L268.00,115.64 L272.00,90.33 L276.00,111.76 L280.00,91.77 L284.00,137.21 L296.00,97.53 L300.00,123.46 L304.00,135.72 L308.00,166.44 L312.00,200.47 L324.00,215.27 L328.00,170.56 L332.00,175.40 L336.00,162.96 L352.00,161.94 L356.00,174.39 L360.00,174.54 L364.00,193.29 L368.00,193.00 L380.00,166.06 L384.00,145.91 L388.00,110.96 L392.00,92.23 L396.00,69.80 L408.00,71.27 L412.00,86.68 L416.00,48.67 L420.00,94.77 L424.00,101.58 L436.00,100.57 L440.00,121.73 L444.00,144.88 L448.00,126.24 L452.00,151.30 L464.00,146.04 L468.00,163.72 L472.00,169.26 L476.00,179.84 L480.00,166.59 L492.00,150.21 L496.00,167.04 L500.00,174.23 L504.00,149.00 L508.00,190.54 L520.00,208.83 L524.00,214.95 L528.00,193.79 L532.00,179.34 L536.00,189.96 L552.00,192.70 L556.00,198.33 L560.00,159.87 L564.00,105.02 L576.00,91.61 L580.00,105.30 L584.00,107.08 L588.00,110.39 L592.00,180.66 L604.00,153.31 L608.00,197.02 L612.00,226.87 L616.00,196.48 L620.00,169.35 L632.00,149.41 L636.00,171.38 L640.00,172.04 L644.00,170.25 L660.00,216.63 L664.00,234.82 L668.00,256.51 L672.00,269.07 L676.00,232.76 L688.00,194.80 L692.00,186.93 L696.00,161.97 L700.00,110.91 L716.00,62.62 L720.00,163.21 L724.00,167.18 L728.00,134.26 L732.00,153.00 L744.00,155.67 L748.00,140.35 L752.00,124.61 L756.00,151.56 L760.00,149.25 L772.00,147.20 L776.00,115.19 L780.00,153.99 L784.00,181.17" fill="none"/>
+    <path class="line-actual" d="M56.00,45.79 L60.00,46.42 L72.00,75.54 L76.00,84.57 L80.00,83.40 L84.00,114.70 L88.00,85.60 L100.00,103.67 L104.00,103.36 L108.00,136.86 L112.00,155.35 L116.00,126.15 L128.00,113.10 L132.00,96.53 L136.00,90.10 L140.00,113.63 L144.00,112.85 L160.00,127.16 L164.00,125.71 L168.00,124.89 L172.00,124.66 L184.00,149.85 L188.00,129.78 L192.00,112.94 L196.00,131.46 L200.00,144.22 L212.00,142.51 L216.00,165.39 L220.00,137.01 L224.00,137.83 L228.00,156.36 L240.00,152.26 L244.00,151.09 L248.00,133.06 L252.00,159.97 L256.00,167.98 L268.00,158.82 L272.00,151.02 L276.00,164.66 L280.00,190.88 L284.00,216.80 L296.00,189.72 L300.00,185.14 L304.00,179.01 L308.00,208.08 L312.00,229.68 L324.00,243.44 L328.00,208.84 L332.00,188.86 L336.00,232.28 L352.00,248.61 L356.00,261.57 L360.00,268.71 L364.00,263.73 L368.00,256.74 L380.00,249.45 L384.00,224.70 L388.00,166.40 L392.00,172.81 L396.00,148.19 L408.00,165.25 L412.00,178.02 L416.00,175.73 L420.00,204.70 L424.00,199.28 L436.00,194.30 L440.00,199.87 L444.00,206.63 L448.00,188.08 L452.00,168.78 L464.00,165.22 L468.00,171.82 L472.00,152.16 L476.00,124.72 L480.00,89.93 L492.00,54.95 L496.00,79.22 L500.00,54.39 L504.00,58.52 L508.00,102.77 L520.00,128.50 L524.00,140.86 L528.00,113.23 L532.00,111.99 L536.00,94.85 L552.00,78.92 L556.00,64.70 L560.00,61.05 L564.00,74.30 L576.00,116.13 L580.00,99.62 L584.00,99.70 L588.00,110.73 L592.00,168.40 L604.00,130.69 L608.00,156.46 L612.00,188.17 L616.00,151.28 L620.00,135.98 L632.00,126.07 L636.00,139.70 L640.00,157.09 L644.00,148.46 L660.00,138.88 L664.00,188.12 L668.00,200.90 L672.00,201.76 L676.00,192.12 L688.00,124.62 L692.00,106.21 L696.00,96.34 L700.00,163.25 L716.00,107.96 L720.00,143.40 L724.00,161.97 L728.00,135.73 L732.00,133.19 L744.00,160.50 L748.00,157.51 L752.00,161.13 L756.00,168.27 L760.00,189.74 L772.00,213.42 L776.00,193.75 L780.00,204.09 L784.00,318.21" fill="none"/>
+    <circle class="end-dot dot-actual" cx="784.0" cy="318.2" r="4"/>
+    <circle class="end-dot dot-synth" cx="784.0" cy="181.2" r="4"/>
+    <text class="end-label label-actual" x="792.0" y="318.2"
+          dominant-baseline="middle">Actual</text>
+    <text class="end-label label-synth" x="792.0" y="181.2"
+          dominant-baseline="middle">Synthetic</text>
+    <line class="crosshair" id="crosshair" x1="0" y1="24" x2="0"
+          y2="340" style="display:none"/>
+    <rect class="hover-capture" x="56" y="24"
+          width="728" height="316" fill="transparent"
+          onmousemove="onChartHover(event)" onmouseleave="onChartLeave()"/>
+  </svg>
+  <div class="legend">
+    <span class="legend-item"><span class="swatch swatch-actual"></span>Actual</span>
+    <span class="legend-item"><span class="swatch swatch-synth"></span>Synthetic (counterfactual)</span>
+  </div>
+  <div class="tooltip" id="chart-tooltip" style="display:none"></div>
+</div>
+<script>
+  const HOVER_DATA_tsla_earnings_miss_growth_peers = [{"x": 56.0, "date": "Jan 22, 2026", "actual": 100.0, "synthetic": 100.0, "gap": -0.0}, {"x": 60.0, "date": "Jan 23, 2026", "actual": 99.93, "synthetic": 98.57, "gap": 1.36}, {"x": 72.0, "date": "Jan 26, 2026", "actual": 96.85, "synthetic": 97.23, "gap": -0.38}, {"x": 76.0, "date": "Jan 27, 2026", "actual": 95.89, "synthetic": 95.27, "gap": 0.62}, {"x": 80.0, "date": "Jan 28, 2026", "actual": 96.02, "synthetic": 93.75, "gap": 2.27}, {"x": 84.0, "date": "Jan 29, 2026", "actual": 92.7, "synthetic": 91.44, "gap": 1.26}, {"x": 88.0, "date": "Jan 30, 2026", "actual": 95.78, "synthetic": 88.92, "gap": 6.86}, {"x": 100.0, "date": "Feb 2, 2026", "actual": 93.87, "synthetic": 87.22, "gap": 6.65}, {"x": 104.0, "date": "Feb 3, 2026", "actual": 93.9, "synthetic": 87.3, "gap": 6.6}, {"x": 108.0, "date": "Feb 4, 2026", "actual": 90.35, "synthetic": 83.12, "gap": 7.23}, {"x": 112.0, "date": "Feb 5, 2026", "actual": 88.39, "synthetic": 76.79, "gap": 11.6}, {"x": 116.0, "date": "Feb 6, 2026", "actual": 91.49, "synthetic": 83.32, "gap": 8.17}, {"x": 128.0, "date": "Feb 9, 2026", "actual": 92.87, "synthetic": 84.26, "gap": 8.61}, {"x": 132.0, "date": "Feb 10, 2026", "actual": 94.63, "synthetic": 83.86, "gap": 10.76}, {"x": 136.0, "date": "Feb 11, 2026", "actual": 95.31, "synthetic": 81.44, "gap": 13.87}, {"x": 140.0, "date": "Feb 12, 2026", "actual": 92.81, "synthetic": 76.69, "gap": 16.12}, {"x": 144.0, "date": "Feb 13, 2026", "actual": 92.9, "synthetic": 90.72, "gap": 2.18}, {"x": 160.0, "date": "Feb 17, 2026", "actual": 91.38, "synthetic": 87.69, "gap": 3.69}, {"x": 164.0, "date": "Feb 18, 2026", "actual": 91.53, "synthetic": 86.83, "gap": 4.7}, {"x": 168.0, "date": "Feb 19, 2026", "actual": 91.62, "synthetic": 85.49, "gap": 6.13}, {"x": 172.0, "date": "Feb 20, 2026", "actual": 91.65, "synthetic": 85.44, "gap": 6.21}, {"x": 184.0, "date": "Feb 23, 2026", "actual": 88.98, "synthetic": 82.34, "gap": 6.64}, {"x": 188.0, "date": "Feb 24, 2026", "actual": 91.1, "synthetic": 82.8, "gap": 8.3}, {"x": 192.0, "date": "Feb 25, 2026", "actual": 92.89, "synthetic": 87.07, "gap": 5.82}, {"x": 196.0, "date": "Feb 26, 2026", "actual": 90.92, "synthetic": 87.89, "gap": 3.04}, {"x": 200.0, "date": "Feb 27, 2026", "actual": 89.57, "synthetic": 86.52, "gap": 3.05}, {"x": 212.0, "date": "Mar 2, 2026", "actual": 89.75, "synthetic": 88.07, "gap": 1.68}, {"x": 216.0, "date": "Mar 3, 2026", "actual": 87.33, "synthetic": 88.18, "gap": -0.84}, {"x": 220.0, "date": "Mar 4, 2026", "actual": 90.34, "synthetic": 92.34, "gap": -2.01}, {"x": 224.0, "date": "Mar 5, 2026", "actual": 90.25, "synthetic": 92.55, "gap": -2.3}, {"x": 228.0, "date": "Mar 6, 2026", "actual": 88.29, "synthetic": 92.42, "gap": -4.13}, {"x": 240.0, "date": "Mar 9, 2026", "actual": 88.72, "synthetic": 94.08, "gap": -5.36}, {"x": 244.0, "date": "Mar 10, 2026", "actual": 88.85, "synthetic": 94.76, "gap": -5.91}, {"x": 248.0, "date": "Mar 11, 2026", "actual": 90.76, "synthetic": 95.43, "gap": -4.67}, {"x": 252.0, "date": "Mar 12, 2026", "actual": 87.91, "synthetic": 91.16, "gap": -3.25}, {"x": 256.0, "date": "Mar 13, 2026", "actual": 87.06, "synthetic": 89.93, "gap": -2.87}, {"x": 268.0, "date": "Mar 16, 2026", "actual": 88.03, "synthetic": 92.6, "gap": -4.57}, {"x": 272.0, "date": "Mar 17, 2026", "actual": 88.85, "synthetic": 95.28, "gap": -6.43}, {"x": 276.0, "date": "Mar 18, 2026", "actual": 87.41, "synthetic": 93.01, "gap": -5.6}, {"x": 280.0, "date": "Mar 19, 2026", "actual": 84.63, "synthetic": 95.13, "gap": -10.5}, {"x": 284.0, "date": "Mar 20, 2026", "actual": 81.89, "synthetic": 90.32, "gap": -8.43}, {"x": 296.0, "date": "Mar 23, 2026", "actual": 84.75, "synthetic": 94.52, "gap": -9.77}, {"x": 300.0, "date": "Mar 24, 2026", "actual": 85.24, "synthetic": 91.77, "gap": -6.53}, {"x": 304.0, "date": "Mar 25, 2026", "actual": 85.89, "synthetic": 90.47, "gap": -4.59}, {"x": 308.0, "date": "Mar 26, 2026", "actual": 82.81, "synthetic": 87.22, "gap": -4.41}, {"x": 312.0, "date": "Mar 27, 2026", "actual": 80.52, "synthetic": 83.62, "gap": -3.09}, {"x": 324.0, "date": "Mar 30, 2026", "actual": 79.06, "synthetic": 82.05, "gap": -2.98}, {"x": 328.0, "date": "Mar 31, 2026", "actual": 82.73, "synthetic": 86.78, "gap": -4.05}, {"x": 332.0, "date": "Apr 1, 2026", "actual": 84.85, "synthetic": 86.27, "gap": -1.43}, {"x": 336.0, "date": "Apr 2, 2026", "actual": 80.25, "synthetic": 87.59, "gap": -7.34}, {"x": 352.0, "date": "Apr 6, 2026", "actual": 78.52, "synthetic": 87.7, "gap": -9.18}, {"x": 356.0, "date": "Apr 7, 2026", "actual": 77.14, "synthetic": 86.38, "gap": -9.23}, {"x": 360.0, "date": "Apr 8, 2026", "actual": 76.39, "synthetic": 86.36, "gap": -9.98}, {"x": 364.0, "date": "Apr 9, 2026", "actual": 76.91, "synthetic": 84.38, "gap": -7.46}, {"x": 368.0, "date": "Apr 10, 2026", "actual": 77.65, "synthetic": 84.41, "gap": -6.75}, {"x": 380.0, "date": "Apr 13, 2026", "actual": 78.43, "synthetic": 87.26, "gap": -8.83}, {"x": 384.0, "date": "Apr 14, 2026", "actual": 81.05, "synthetic": 89.39, "gap": -8.35}, {"x": 388.0, "date": "Apr 15, 2026", "actual": 87.22, "synthetic": 93.1, "gap": -5.87}, {"x": 392.0, "date": "Apr 16, 2026", "actual": 86.55, "synthetic": 95.08, "gap": -8.54}, {"x": 396.0, "date": "Apr 17, 2026", "actual": 89.15, "synthetic": 97.46, "gap": -8.3}, {"x": 408.0, "date": "Apr 20, 2026", "actual": 87.35, "synthetic": 97.3, "gap": -9.95}, {"x": 412.0, "date": "Apr 21, 2026", "actual": 85.99, "synthetic": 95.67, "gap": -9.68}, {"x": 416.0, "date": "Apr 22, 2026", "actual": 86.24, "synthetic": 99.7, "gap": -13.46}, {"x": 420.0, "date": "Apr 23, 2026", "actual": 83.17, "synthetic": 94.81, "gap": -11.64}, {"x": 424.0, "date": "Apr 24, 2026", "actual": 83.74, "synthetic": 94.09, "gap": -10.35}, {"x": 436.0, "date": "Apr 27, 2026", "actual": 84.27, "synthetic": 94.2, "gap": -9.93}, {"x": 440.0, "date": "Apr 28, 2026", "actual": 83.68, "synthetic": 91.96, "gap": -8.28}, {"x": 444.0, "date": "Apr 29, 2026", "actual": 82.96, "synthetic": 89.5, "gap": -6.54}, {"x": 448.0, "date": "Apr 30, 2026", "actual": 84.93, "synthetic": 91.48, "gap": -6.55}, {"x": 452.0, "date": "May 1, 2026", "actual": 86.97, "synthetic": 88.82, "gap": -1.85}, {"x": 464.0, "date": "May 4, 2026", "actual": 87.35, "synthetic": 89.38, "gap": -2.03}, {"x": 468.0, "date": "May 5, 2026", "actual": 86.65, "synthetic": 87.51, "gap": -0.86}, {"x": 472.0, "date": "May 6, 2026", "actual": 88.73, "synthetic": 86.92, "gap": 1.81}, {"x": 476.0, "date": "May 7, 2026", "actual": 91.64, "synthetic": 85.8, "gap": 5.84}, {"x": 480.0, "date": "May 8, 2026", "actual": 95.32, "synthetic": 87.2, "gap": 8.12}, {"x": 492.0, "date": "May 11, 2026", "actual": 99.03, "synthetic": 88.94, "gap": 10.09}, {"x": 496.0, "date": "May 12, 2026", "actual": 96.46, "synthetic": 87.16, "gap": 9.3}, {"x": 500.0, "date": "May 13, 2026", "actual": 99.09, "synthetic": 86.39, "gap": 12.69}, {"x": 504.0, "date": "May 14, 2026", "actual": 98.65, "synthetic": 89.07, "gap": 9.58}, {"x": 508.0, "date": "May 15, 2026", "actual": 93.96, "synthetic": 84.67, "gap": 9.3}, {"x": 520.0, "date": "May 18, 2026", "actual": 91.24, "synthetic": 82.73, "gap": 8.51}, {"x": 524.0, "date": "May 19, 2026", "actual": 89.93, "synthetic": 82.08, "gap": 7.85}, {"x": 528.0, "date": "May 20, 2026", "actual": 92.86, "synthetic": 84.32, "gap": 8.53}, {"x": 532.0, "date": "May 21, 2026", "actual": 92.99, "synthetic": 85.85, "gap": 7.13}, {"x": 536.0, "date": "May 22, 2026", "actual": 94.8, "synthetic": 84.73, "gap": 10.07}, {"x": 552.0, "date": "May 26, 2026", "actual": 96.49, "synthetic": 84.44, "gap": 12.05}, {"x": 556.0, "date": "May 27, 2026", "actual": 98.0, "synthetic": 83.84, "gap": 14.15}, {"x": 560.0, "date": "May 28, 2026", "actual": 98.38, "synthetic": 87.92, "gap": 10.47}, {"x": 564.0, "date": "May 29, 2026", "actual": 96.98, "synthetic": 93.73, "gap": 3.25}, {"x": 576.0, "date": "Jun 1, 2026", "actual": 92.55, "synthetic": 95.15, "gap": -2.6}, {"x": 580.0, "date": "Jun 2, 2026", "actual": 94.3, "synthetic": 93.7, "gap": 0.6}, {"x": 584.0, "date": "Jun 3, 2026", "actual": 94.29, "synthetic": 93.51, "gap": 0.78}, {"x": 588.0, "date": "Jun 4, 2026", "actual": 93.12, "synthetic": 93.16, "gap": -0.04}, {"x": 592.0, "date": "Jun 5, 2026", "actual": 87.01, "synthetic": 85.71, "gap": 1.3}, {"x": 604.0, "date": "Jun 8, 2026", "actual": 91.01, "synthetic": 88.61, "gap": 2.4}, {"x": 608.0, "date": "Jun 9, 2026", "actual": 88.28, "synthetic": 83.98, "gap": 4.3}, {"x": 612.0, "date": "Jun 10, 2026", "actual": 84.92, "synthetic": 80.82, "gap": 4.1}, {"x": 616.0, "date": "Jun 11, 2026", "actual": 88.83, "synthetic": 84.04, "gap": 4.79}, {"x": 620.0, "date": "Jun 12, 2026", "actual": 90.45, "synthetic": 86.91, "gap": 3.54}, {"x": 632.0, "date": "Jun 15, 2026", "actual": 91.5, "synthetic": 89.02, "gap": 2.47}, {"x": 636.0, "date": "Jun 16, 2026", "actual": 90.05, "synthetic": 86.7, "gap": 3.36}, {"x": 640.0, "date": "Jun 17, 2026", "actual": 88.21, "synthetic": 86.63, "gap": 1.58}, {"x": 644.0, "date": "Jun 18, 2026", "actual": 89.12, "synthetic": 86.82, "gap": 2.31}, {"x": 660.0, "date": "Jun 22, 2026", "actual": 90.14, "synthetic": 81.9, "gap": 8.24}, {"x": 664.0, "date": "Jun 23, 2026", "actual": 84.92, "synthetic": 79.98, "gap": 4.95}, {"x": 668.0, "date": "Jun 24, 2026", "actual": 83.57, "synthetic": 77.68, "gap": 5.89}, {"x": 672.0, "date": "Jun 25, 2026", "actual": 83.48, "synthetic": 76.35, "gap": 7.13}, {"x": 676.0, "date": "Jun 26, 2026", "actual": 84.5, "synthetic": 80.2, "gap": 4.31}, {"x": 688.0, "date": "Jun 29, 2026", "actual": 91.65, "synthetic": 84.22, "gap": 7.43}, {"x": 692.0, "date": "Jun 30, 2026", "actual": 93.6, "synthetic": 85.05, "gap": 8.55}, {"x": 696.0, "date": "Jul 1, 2026", "actual": 94.65, "synthetic": 87.69, "gap": 6.95}, {"x": 700.0, "date": "Jul 2, 2026", "actual": 87.56, "synthetic": 93.1, "gap": -5.54}, {"x": 716.0, "date": "Jul 6, 2026", "actual": 93.42, "synthetic": 98.22, "gap": -4.8}, {"x": 720.0, "date": "Jul 7, 2026", "actual": 89.66, "synthetic": 87.56, "gap": 2.1}, {"x": 724.0, "date": "Jul 8, 2026", "actual": 87.69, "synthetic": 87.14, "gap": 0.55}, {"x": 728.0, "date": "Jul 9, 2026", "actual": 90.47, "synthetic": 90.63, "gap": -0.16}, {"x": 732.0, "date": "Jul 10, 2026", "actual": 90.74, "synthetic": 88.64, "gap": 2.1}, {"x": 744.0, "date": "Jul 13, 2026", "actual": 87.85, "synthetic": 88.36, "gap": -0.51}, {"x": 748.0, "date": "Jul 14, 2026", "actual": 88.17, "synthetic": 89.98, "gap": -1.82}, {"x": 752.0, "date": "Jul 15, 2026", "actual": 87.78, "synthetic": 91.65, "gap": -3.87}, {"x": 756.0, "date": "Jul 16, 2026", "actual": 87.03, "synthetic": 88.8, "gap": -1.77}, {"x": 760.0, "date": "Jul 17, 2026", "actual": 84.75, "synthetic": 89.04, "gap": -4.29}, {"x": 772.0, "date": "Jul 20, 2026", "actual": 82.24, "synthetic": 89.26, "gap": -7.01}, {"x": 776.0, "date": "Jul 21, 2026", "actual": 84.33, "synthetic": 92.65, "gap": -8.32}, {"x": 780.0, "date": "Jul 22, 2026", "actual": 83.23, "synthetic": 88.54, "gap": -5.31}, {"x": 784.0, "date": "Jul 23, 2026", "actual": 71.14, "synthetic": 85.66, "gap": -14.52}];
+</script>
+<script>window.__HOVER_DATA__ = HOVER_DATA_tsla_earnings_miss_growth_peers;</script>
+  </div>
+
+  <div class="card">
+    <h2>Fit quality</h2>
+    <div class="kv">
+      <div><span class="k">Fit-window RMSE</span>6.7895</div>
+      <div><span class="k">RMSE &divide; fit-window std dev</span>1.29&times;</div>
+      <div><span class="k">Fit-window days</span>125</div>
+      <div><span class="k">Confound-window mean gap</span>n/a (fit-end = treatment date)</div>
+      <div><span class="k">Post-period mean gap</span>-14.52</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Placebo test — same method run on every unit, treated one highlighted</h2>
+    
+<table class="placebo-table">
+  <thead><tr><th>Unit</th><th>Mean post-period gap</th><th>Max abs. gap</th></tr></thead>
+  <tbody><tr class=""><td>RIVN</td><td class="num">+29.71%</td><td class="num">29.71%</td></tr><tr class=""><td>LCID</td><td class="num">-16.78%</td><td class="num">16.78%</td></tr><tr class="row-treated"><td>TSLA (treated)</td><td class="num">-14.52%</td><td class="num">14.52%</td></tr><tr class=""><td>PLTR</td><td class="num">-2.85%</td><td class="num">2.85%</td></tr><tr class=""><td>COIN</td><td class="num">-0.71%</td><td class="num">0.71%</td></tr></tbody>
+</table>
+
+  </div>
+
+  <div class="card">
+    <h2>Verdict</h2>
+    <div class="verdict"><p><strong>Do not trust the gap below.</strong> The fit-window RMSE is <strong>1.29&times;</strong> this unit's own fit-window standard deviation — the donor pool literally cannot reconstruct TSLA's pre-period path at all, which usually means the donor pool is the wrong choice for this unit (e.g. TSLA moved for reasons entirely disconnected from the donors' own drivers), not that a real effect was found. Pick a different/better-correlated donor pool before drawing any conclusion from this run.</p></div>
+  </div>
+
+  <div class="footer">Generated 2026-07-27 07:38 UTC &middot; causal-toolkit &middot; synthetic control
+    (Abadie-Diamond-Hainmueller, outcome-only variant) &middot; donor pool hand-picked, not
+    algorithmically matched &middot; treat every result here as directional, not a p-value.</div>
+</div>
+<script>
+function onChartHover(evt) {
+  const svg = document.getElementById('chart-svg');
+  const pt = svg.createSVGPoint();
+  pt.x = evt.clientX; pt.y = evt.clientY;
+  const loc = pt.matrixTransform(svg.getScreenCTM().inverse());
+  const data = window.__HOVER_DATA__;
+  if (!data || !data.length) return;
+  let nearest = data[0], minDist = Infinity;
+  for (const d of data) {
+    const dist = Math.abs(d.x - loc.x);
+    if (dist < minDist) { minDist = dist; nearest = d; }
+  }
+  const crosshair = document.getElementById('crosshair');
+  crosshair.setAttribute('x1', nearest.x); crosshair.setAttribute('x2', nearest.x);
+  crosshair.style.display = 'block';
+  const tip = document.getElementById('chart-tooltip');
+  tip.style.display = 'block';
+  tip.style.left = (evt.pageX + 14) + 'px';
+  tip.style.top = (evt.pageY - 40) + 'px';
+  tip.innerHTML = `<div class="t-date">${nearest.date}</div>` +
+    `<div class="t-row"><span>Actual</span><strong>${nearest.actual.toFixed(2)}</strong></div>` +
+    `<div class="t-row"><span>Synthetic</span><strong>${nearest.synthetic.toFixed(2)}</strong></div>` +
+    `<div class="t-row"><span>Gap</span><strong>${nearest.gap >= 0 ? '+' : ''}${nearest.gap.toFixed(2)}</strong></div>`;
+}
+function onChartLeave() {
+  document.getElementById('crosshair').style.display = 'none';
+  document.getElementById('chart-tooltip').style.display = 'none';
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Did Bloom Energy's Hunterbrook short-seller report break it from clean-energy peers?</title>
+<style>
+  /* Dark is the unconditional default look for this report (not OS-driven) —
+     light is available only via an explicit data-theme="light" override. */
+  :root { color-scheme: dark; }
+  body {
+    margin:0; font-family: system-ui,-apple-system,"Segoe UI",sans-serif;
+    background:#0d0d0d; color:#ffffff;
+  }
+  :root[data-theme="light"] body { background:#f9f9f7; color:#0b0b0b; }
+
+  .wrap { max-width: 920px; margin: 0 auto; padding: 32px 20px 60px; }
+  h1 { font-size: 22px; margin: 0 0 6px; }
+  .subtitle { color:#c3c2b7; font-size: 14px; margin-bottom: 24px; }
+  :root[data-theme="light"] .subtitle { color:#52514e; }
+
+  .card {
+    background:#1a1a19; border:1px solid rgba(255,255,255,0.10); border-radius:10px;
+    padding:20px 24px; margin-bottom:20px;
+  }
+  :root[data-theme="light"] .card { background:#fcfcfb; border-color: rgba(11,11,11,0.10); }
+
+  .card h2 { font-size: 15px; text-transform: uppercase; letter-spacing: 0.5px;
+    color:#c3c2b7; margin: 0 0 14px; }
+  :root[data-theme="light"] .card h2 { color:#52514e; }
+
+  .viz-root {
+    --surface-1:#1a1a19; --text-primary:#ffffff; --text-secondary:#c3c2b7;
+    --text-muted:#898781; --grid:#2c2c2a; --baseline:#383835;
+    --series-1:#3987e5; --series-2:#d95926;
+  }
+  :root[data-theme="light"] .viz-root {
+    --surface-1:#fcfcfb; --text-primary:#0b0b0b; --text-secondary:#52514e;
+    --text-muted:#898781; --grid:#e1e0d9; --baseline:#c3c2b7;
+    --series-1:#2a78d6; --series-2:#eb6834;
+  }
+
+  .gridline { stroke: var(--grid); stroke-width: 1; }
+  .axis { stroke: var(--baseline); stroke-width: 1; }
+  .tick { fill: var(--text-muted); font-size: 11px; }
+  .line-actual { stroke: var(--series-1); stroke-width: 2; }
+  .line-synth { stroke: var(--series-2); stroke-width: 2; }
+  .end-dot { stroke: var(--surface-1); stroke-width: 2; }
+  .dot-actual { fill: var(--series-1); }
+  .dot-synth { fill: var(--series-2); }
+  .end-label { font-size: 12px; fill: var(--text-secondary); }
+  .treatment-line { stroke: var(--text-muted); stroke-width: 1; stroke-dasharray: 3 3; }
+  .treatment-label { font-size: 11px; fill: var(--text-muted); }
+  .confound-band { fill: var(--text-muted); opacity: 0.08; }
+  .crosshair { stroke: var(--text-muted); stroke-width: 1; pointer-events:none; }
+
+  .legend { display:flex; gap:18px; padding: 6px 0 0 56px; font-size: 13px;
+    color: var(--text-secondary); }
+  .legend-item { display:flex; align-items:center; gap:6px; }
+  .swatch { width:10px; height:10px; border-radius:2px; display:inline-block; }
+  .swatch-actual { background: var(--series-1); }
+  .swatch-synth { background: var(--series-2); }
+
+  .tooltip {
+    position:absolute; background: var(--surface-1); border:1px solid rgba(255,255,255,0.10);
+    border-radius:6px; padding:8px 10px; font-size:12px; pointer-events:none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4); color: var(--text-primary);
+  }
+  :root[data-theme="light"] .tooltip {
+    border-color: rgba(11,11,11,0.10); box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  }
+  .tooltip .t-date { color: var(--text-secondary); margin-bottom:4px; }
+  .tooltip .t-row { display:flex; justify-content:space-between; gap:16px; }
+
+  table.placebo-table { width:100%; border-collapse: collapse; font-size: 13px; }
+  table.placebo-table th, table.placebo-table td {
+    padding: 7px 10px; text-align:left; border-bottom: 1px solid #2c2c2a;
+    font-variant-numeric: tabular-nums; color: inherit;
+  }
+  :root[data-theme="light"] table.placebo-table th,
+  :root[data-theme="light"] table.placebo-table td { border-bottom-color: #e1e0d9; }
+  table.placebo-table td.num { text-align: right; }
+  table.placebo-table th { color:#898781; font-size:11px; text-transform:uppercase;
+    letter-spacing:0.5px; }
+  tr.row-treated { font-weight: 600; }
+
+  .verdict { font-size: 14px; line-height: 1.6; }
+  .kv { display:grid; grid-template-columns: 1fr 1fr; gap: 10px 24px; font-size: 13px; }
+  .kv div span.k { color:#c3c2b7; display:block; font-size:11px;
+    text-transform:uppercase; letter-spacing:0.5px; }
+  :root[data-theme="light"] .kv div span.k { color:#52514e; }
+
+  .footer { color:#898781; font-size: 11px; margin-top: 32px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Did Bloom Energy's Hunterbrook short-seller report break it from clean-energy peers?</h1>
+  <div class="subtitle">Treated: BE. Donors: FCEL, PLUG (fuel-cell/clean-hydrogen peers) — a hand-picked peer group, not an algorithmic match. Treatment date is the Hunterbrook Capital report (2026-07-08). Tests whether BE's decline is company-specific (a real post-treatment gap vs. peers) or just riding the same clean-energy/rate-sensitive-growth wave FCEL and PLUG were already on. Pre-period deliberately short (~4 months, not 2 years): BE's own multi-year rally is so much larger than FCEL/PLUG's that a long window makes the donor pool unusable (see README) — a short window centered on BE's recent behavior is the standard fix when the treated unit has a strong idiosyncratic long-run trend.</div>
+
+  <div class="card">
+    <h2>Actual vs. synthetic counterfactual</h2>
+    
+<div class="viz-root">
+  <svg viewBox="0 0 860 380" width="100%" height="380" id="chart-svg">
+    
+    <line class="gridline" x1="56" y1="340.0" x2="784" y2="340.0"/><text class="tick" x="48" y="340.0" text-anchor="end" dominant-baseline="middle">59</text><line class="gridline" x1="56" y1="261.0" x2="784" y2="261.0"/><text class="tick" x="48" y="261.0" text-anchor="end" dominant-baseline="middle">107</text><line class="gridline" x1="56" y1="182.0" x2="784" y2="182.0"/><text class="tick" x="48" y="182.0" text-anchor="end" dominant-baseline="middle">156</text><line class="gridline" x1="56" y1="103.0" x2="784" y2="103.0"/><text class="tick" x="48" y="103.0" text-anchor="end" dominant-baseline="middle">205</text><line class="gridline" x1="56" y1="24.0" x2="784" y2="24.0"/><text class="tick" x="48" y="24.0" text-anchor="end" dominant-baseline="middle">254</text>
+    <line class="axis" x1="56" y1="340"
+          x2="784" y2="340"/>
+    <line class="treatment-line" x1="707.6" y1="24" x2="707.6" y2="340"/><text class="treatment-label" x="707.6" y="16" text-anchor="middle">Treatment date</text>
+    <path class="line-synth" d="M56.00,272.93 L61.09,244.34 L66.18,223.97 L71.27,239.47 L76.36,252.78 L91.64,250.04 L96.73,255.60 L101.82,247.48 L106.91,249.38 L112.00,255.06 L127.27,247.53 L132.36,240.62 L137.45,242.26 L142.55,236.67 L147.64,249.48 L162.91,243.28 L168.00,243.83 L173.09,244.65 L178.18,246.93 L183.27,253.29 L198.55,257.31 L203.64,247.55 L208.73,248.54 L213.82,236.53 L234.18,216.19 L239.27,229.91 L244.36,220.05 L249.45,213.06 L254.55,212.68 L269.82,209.84 L274.91,195.85 L280.00,195.68 L285.09,201.39 L290.18,207.51 L305.45,170.60 L310.55,177.42 L315.64,160.69 L320.73,159.99 L325.82,166.65 L341.09,172.87 L346.18,179.29 L351.27,137.87 L356.36,160.40 L361.45,160.64 L376.73,160.32 L381.82,144.67 L386.91,148.22 L392.00,163.15 L397.09,158.43 L412.36,121.17 L417.45,113.90 L422.55,74.38 L427.64,80.14 L432.73,81.78 L448.00,119.30 L453.09,130.79 L458.18,119.84 L463.27,62.55 L468.36,67.80 L488.73,65.83 L493.82,47.04 L498.91,45.79 L504.00,68.44 L519.27,70.49 L524.36,46.99 L529.45,86.51 L534.55,94.53 L539.64,137.36 L554.91,146.52 L560.00,158.98 L565.09,167.46 L570.18,163.95 L575.27,171.84 L590.55,166.82 L595.64,164.66 L600.73,167.85 L605.82,138.19 L626.18,141.16 L631.27,156.73 L636.36,164.90 L641.45,175.08 L646.55,160.58 L661.82,134.78 L666.91,102.39 L672.00,123.19 L677.09,137.67 L697.45,131.46 L702.55,157.37 L707.64,171.90 L712.73,175.88 L717.82,194.18 L733.09,205.95 L738.18,190.08 L743.27,198.60 L748.36,214.35 L753.45,208.17 L768.73,205.90 L773.82,188.97 L778.91,188.66 L784.00,188.35" fill="none"/>
+    <path class="line-actual" d="M56.00,272.93 L61.09,285.57 L66.18,274.11 L71.27,278.78 L76.36,302.93 L91.64,287.22 L96.73,284.61 L101.82,279.54 L106.91,281.53 L112.00,284.12 L127.27,284.93 L132.36,278.72 L137.45,282.10 L142.55,272.25 L147.64,288.39 L162.91,296.95 L168.00,292.52 L173.09,288.30 L178.18,304.56 L183.27,304.83 L198.55,318.21 L203.64,302.64 L208.73,305.60 L213.82,302.51 L234.18,303.12 L239.27,302.23 L244.36,291.65 L249.45,278.64 L254.55,272.24 L269.82,262.53 L274.91,221.28 L280.00,226.33 L285.09,230.01 L290.18,232.16 L305.45,222.02 L310.55,219.45 L315.64,210.84 L320.73,203.22 L325.82,209.45 L341.09,206.03 L346.18,214.13 L351.27,154.13 L356.36,158.62 L361.45,151.65 L376.73,153.48 L381.82,147.04 L386.91,156.57 L392.00,182.70 L397.09,180.37 L412.36,158.08 L417.45,161.22 L422.55,152.39 L427.64,139.09 L432.73,165.84 L448.00,182.63 L453.09,180.07 L458.18,159.64 L463.27,134.74 L468.36,139.99 L488.73,140.08 L493.82,148.45 L498.91,152.14 L504.00,157.02 L519.27,168.21 L524.36,139.64 L529.45,154.76 L534.55,150.82 L539.64,177.86 L554.91,187.64 L560.00,181.75 L565.09,206.47 L570.18,192.20 L575.27,181.16 L590.55,167.25 L595.64,161.04 L600.73,157.03 L605.82,114.26 L626.18,97.76 L631.27,121.01 L636.36,116.91 L641.45,133.47 L646.55,189.15 L661.82,166.75 L666.91,139.78 L672.00,152.64 L677.09,170.77 L697.45,147.23 L702.55,172.05 L707.64,186.93 L712.73,184.28 L717.82,196.36 L733.09,207.19 L738.18,197.54 L743.27,201.46 L748.36,233.26 L753.45,225.24 L768.73,242.67 L773.82,214.23 L778.91,222.07 L784.00,222.96" fill="none"/>
+    <circle class="end-dot dot-actual" cx="784.0" cy="223.0" r="4"/>
+    <circle class="end-dot dot-synth" cx="784.0" cy="188.4" r="4"/>
+    <text class="end-label label-actual" x="792.0" y="223.0"
+          dominant-baseline="middle">Actual</text>
+    <text class="end-label label-synth" x="792.0" y="188.4"
+          dominant-baseline="middle">Synthetic</text>
+    <line class="crosshair" id="crosshair" x1="0" y1="24" x2="0"
+          y2="340" style="display:none"/>
+    <rect class="hover-capture" x="56" y="24"
+          width="728" height="316" fill="transparent"
+          onmousemove="onChartHover(event)" onmouseleave="onChartLeave()"/>
+  </svg>
+  <div class="legend">
+    <span class="legend-item"><span class="swatch swatch-actual"></span>Actual</span>
+    <span class="legend-item"><span class="swatch swatch-synth"></span>Synthetic (counterfactual)</span>
+  </div>
+  <div class="tooltip" id="chart-tooltip" style="display:none"></div>
+</div>
+<script>
+  const HOVER_DATA_be_short_seller = [{"x": 56.0, "date": "Mar 2, 2026", "actual": 100.0, "synthetic": 100.0, "gap": 0.0}, {"x": 61.09, "date": "Mar 3, 2026", "actual": 92.18, "synthetic": 117.68, "gap": -25.5}, {"x": 66.18, "date": "Mar 4, 2026", "actual": 99.27, "synthetic": 130.28, "gap": -31.02}, {"x": 71.27, "date": "Mar 5, 2026", "actual": 96.38, "synthetic": 120.69, "gap": -24.32}, {"x": 76.36, "date": "Mar 6, 2026", "actual": 81.44, "synthetic": 112.46, "gap": -31.02}, {"x": 91.64, "date": "Mar 9, 2026", "actual": 91.16, "synthetic": 114.16, "gap": -23.0}, {"x": 96.73, "date": "Mar 10, 2026", "actual": 92.77, "synthetic": 110.72, "gap": -17.94}, {"x": 101.82, "date": "Mar 11, 2026", "actual": 95.91, "synthetic": 115.74, "gap": -19.83}, {"x": 106.91, "date": "Mar 12, 2026", "actual": 94.68, "synthetic": 114.57, "gap": -19.88}, {"x": 112.0, "date": "Mar 13, 2026", "actual": 93.08, "synthetic": 111.05, "gap": -17.97}, {"x": 127.27, "date": "Mar 16, 2026", "actual": 92.58, "synthetic": 115.71, "gap": -23.13}, {"x": 132.36, "date": "Mar 17, 2026", "actual": 96.42, "synthetic": 119.98, "gap": -23.57}, {"x": 137.45, "date": "Mar 18, 2026", "actual": 94.33, "synthetic": 118.97, "gap": -24.64}, {"x": 142.55, "date": "Mar 19, 2026", "actual": 100.42, "synthetic": 122.42, "gap": -22.01}, {"x": 147.64, "date": "Mar 20, 2026", "actual": 90.43, "synthetic": 114.5, "gap": -24.07}, {"x": 162.91, "date": "Mar 23, 2026", "actual": 85.14, "synthetic": 118.34, "gap": -33.2}, {"x": 168.0, "date": "Mar 24, 2026", "actual": 87.88, "synthetic": 117.99, "gap": -30.12}, {"x": 173.09, "date": "Mar 25, 2026", "actual": 90.49, "synthetic": 117.49, "gap": -26.99}, {"x": 178.18, "date": "Mar 26, 2026", "actual": 80.43, "synthetic": 116.08, "gap": -35.64}, {"x": 183.27, "date": "Mar 27, 2026", "actual": 80.27, "synthetic": 112.15, "gap": -31.88}, {"x": 198.55, "date": "Mar 30, 2026", "actual": 71.99, "synthetic": 109.66, "gap": -37.67}, {"x": 203.64, "date": "Mar 31, 2026", "actual": 81.62, "synthetic": 115.69, "gap": -34.07}, {"x": 208.73, "date": "Apr 1, 2026", "actual": 79.79, "synthetic": 115.08, "gap": -35.29}, {"x": 213.82, "date": "Apr 2, 2026", "actual": 81.7, "synthetic": 122.51, "gap": -40.81}, {"x": 234.18, "date": "Apr 6, 2026", "actual": 81.33, "synthetic": 135.09, "gap": -53.77}, {"x": 239.27, "date": "Apr 7, 2026", "actual": 81.87, "synthetic": 126.61, "gap": -44.73}, {"x": 244.36, "date": "Apr 8, 2026", "actual": 88.42, "synthetic": 132.7, "gap": -44.28}, {"x": 249.45, "date": "Apr 9, 2026", "actual": 96.46, "synthetic": 137.03, "gap": -40.56}, {"x": 254.55, "date": "Apr 10, 2026", "actual": 100.42, "synthetic": 137.26, "gap": -36.84}, {"x": 269.82, "date": "Apr 13, 2026", "actual": 106.43, "synthetic": 139.02, "gap": -32.59}, {"x": 274.91, "date": "Apr 14, 2026", "actual": 131.95, "synthetic": 147.67, "gap": -15.73}, {"x": 280.0, "date": "Apr 15, 2026", "actual": 128.82, "synthetic": 147.77, "gap": -18.96}, {"x": 285.09, "date": "Apr 16, 2026", "actual": 126.54, "synthetic": 144.24, "gap": -17.7}, {"x": 290.18, "date": "Apr 17, 2026", "actual": 125.22, "synthetic": 140.46, "gap": -15.24}, {"x": 305.45, "date": "Apr 20, 2026", "actual": 131.49, "synthetic": 163.29, "gap": -31.8}, {"x": 310.55, "date": "Apr 21, 2026", "actual": 133.08, "synthetic": 159.07, "gap": -25.99}, {"x": 315.64, "date": "Apr 22, 2026", "actual": 138.4, "synthetic": 169.42, "gap": -31.02}, {"x": 320.73, "date": "Apr 23, 2026", "actual": 143.11, "synthetic": 169.85, "gap": -26.74}, {"x": 325.82, "date": "Apr 24, 2026", "actual": 139.26, "synthetic": 165.73, "gap": -26.47}, {"x": 341.09, "date": "Apr 27, 2026", "actual": 141.37, "synthetic": 161.89, "gap": -20.51}, {"x": 346.18, "date": "Apr 28, 2026", "actual": 136.37, "synthetic": 157.92, "gap": -21.55}, {"x": 351.27, "date": "Apr 29, 2026", "actual": 173.48, "synthetic": 183.53, "gap": -10.06}, {"x": 356.36, "date": "Apr 30, 2026", "actual": 170.7, "synthetic": 169.6, "gap": 1.1}, {"x": 361.45, "date": "May 1, 2026", "actual": 175.01, "synthetic": 169.45, "gap": 5.56}, {"x": 376.73, "date": "May 4, 2026", "actual": 173.88, "synthetic": 169.65, "gap": 4.23}, {"x": 381.82, "date": "May 5, 2026", "actual": 177.86, "synthetic": 179.33, "gap": -1.47}, {"x": 386.91, "date": "May 6, 2026", "actual": 171.97, "synthetic": 177.13, "gap": -5.16}, {"x": 392.0, "date": "May 7, 2026", "actual": 155.81, "synthetic": 167.9, "gap": -12.09}, {"x": 397.09, "date": "May 8, 2026", "actual": 157.25, "synthetic": 170.82, "gap": -13.57}, {"x": 412.36, "date": "May 11, 2026", "actual": 171.04, "synthetic": 193.86, "gap": -22.82}, {"x": 417.45, "date": "May 12, 2026", "actual": 169.09, "synthetic": 198.36, "gap": -29.27}, {"x": 422.55, "date": "May 13, 2026", "actual": 174.55, "synthetic": 222.8, "gap": -48.25}, {"x": 427.64, "date": "May 14, 2026", "actual": 182.78, "synthetic": 219.24, "gap": -36.46}, {"x": 432.73, "date": "May 15, 2026", "actual": 166.23, "synthetic": 218.23, "gap": -51.99}, {"x": 448.0, "date": "May 18, 2026", "actual": 155.85, "synthetic": 195.02, "gap": -39.17}, {"x": 453.09, "date": "May 19, 2026", "actual": 157.43, "synthetic": 187.91, "gap": -30.48}, {"x": 458.18, "date": "May 20, 2026", "actual": 170.07, "synthetic": 194.68, "gap": -24.62}, {"x": 463.27, "date": "May 21, 2026", "actual": 185.47, "synthetic": 230.12, "gap": -44.65}, {"x": 468.36, "date": "May 22, 2026", "actual": 182.22, "synthetic": 226.87, "gap": -44.65}, {"x": 488.73, "date": "May 26, 2026", "actual": 182.17, "synthetic": 228.09, "gap": -45.92}, {"x": 493.82, "date": "May 27, 2026", "actual": 176.99, "synthetic": 239.71, "gap": -62.72}, {"x": 498.91, "date": "May 28, 2026", "actual": 174.7, "synthetic": 240.48, "gap": -65.78}, {"x": 504.0, "date": "May 29, 2026", "actual": 171.69, "synthetic": 226.48, "gap": -54.79}, {"x": 519.27, "date": "Jun 1, 2026", "actual": 164.77, "synthetic": 225.21, "gap": -60.44}, {"x": 524.36, "date": "Jun 2, 2026", "actual": 182.44, "synthetic": 239.74, "gap": -57.31}, {"x": 529.45, "date": "Jun 3, 2026", "actual": 173.08, "synthetic": 215.3, "gap": -42.22}, {"x": 534.55, "date": "Jun 4, 2026", "actual": 175.52, "synthetic": 210.34, "gap": -34.82}, {"x": 539.64, "date": "Jun 5, 2026", "actual": 158.8, "synthetic": 183.85, "gap": -25.05}, {"x": 554.91, "date": "Jun 8, 2026", "actual": 152.75, "synthetic": 178.18, "gap": -25.43}, {"x": 560.0, "date": "Jun 9, 2026", "actual": 156.39, "synthetic": 170.48, "gap": -14.09}, {"x": 565.09, "date": "Jun 10, 2026", "actual": 141.1, "synthetic": 165.23, "gap": -24.13}, {"x": 570.18, "date": "Jun 11, 2026", "actual": 149.93, "synthetic": 167.4, "gap": -17.48}, {"x": 575.27, "date": "Jun 12, 2026", "actual": 156.76, "synthetic": 162.52, "gap": -5.77}, {"x": 590.55, "date": "Jun 15, 2026", "actual": 165.36, "synthetic": 165.62, "gap": -0.26}, {"x": 595.64, "date": "Jun 16, 2026", "actual": 169.2, "synthetic": 166.96, "gap": 2.24}, {"x": 600.73, "date": "Jun 17, 2026", "actual": 171.68, "synthetic": 164.99, "gap": 6.69}, {"x": 605.82, "date": "Jun 18, 2026", "actual": 198.14, "synthetic": 183.33, "gap": 14.81}, {"x": 626.18, "date": "Jun 22, 2026", "actual": 208.34, "synthetic": 181.5, "gap": 26.84}, {"x": 631.27, "date": "Jun 23, 2026", "actual": 193.96, "synthetic": 171.87, "gap": 22.1}, {"x": 636.36, "date": "Jun 24, 2026", "actual": 196.5, "synthetic": 166.81, "gap": 29.69}, {"x": 641.45, "date": "Jun 25, 2026", "actual": 186.25, "synthetic": 160.52, "gap": 25.74}, {"x": 646.55, "date": "Jun 26, 2026", "actual": 151.82, "synthetic": 169.49, "gap": -17.67}, {"x": 661.82, "date": "Jun 29, 2026", "actual": 165.67, "synthetic": 185.45, "gap": -19.78}, {"x": 666.91, "date": "Jun 30, 2026", "actual": 182.35, "synthetic": 205.48, "gap": -23.13}, {"x": 672.0, "date": "Jul 1, 2026", "actual": 174.4, "synthetic": 192.61, "gap": -18.22}, {"x": 677.09, "date": "Jul 2, 2026", "actual": 163.19, "synthetic": 183.66, "gap": -20.47}, {"x": 697.45, "date": "Jul 6, 2026", "actual": 177.74, "synthetic": 187.5, "gap": -9.76}, {"x": 702.55, "date": "Jul 7, 2026", "actual": 162.39, "synthetic": 171.47, "gap": -9.08}, {"x": 707.64, "date": "Jul 8, 2026", "actual": 153.19, "synthetic": 162.48, "gap": -9.3}, {"x": 712.73, "date": "Jul 9, 2026", "actual": 154.83, "synthetic": 160.03, "gap": -5.19}, {"x": 717.82, "date": "Jul 10, 2026", "actual": 147.36, "synthetic": 148.71, "gap": -1.35}, {"x": 733.09, "date": "Jul 13, 2026", "actual": 140.66, "synthetic": 141.43, "gap": -0.77}, {"x": 738.18, "date": "Jul 14, 2026", "actual": 146.63, "synthetic": 151.24, "gap": -4.61}, {"x": 743.27, "date": "Jul 15, 2026", "actual": 144.2, "synthetic": 145.97, "gap": -1.77}, {"x": 748.36, "date": "Jul 16, 2026", "actual": 124.54, "synthetic": 136.23, "gap": -11.69}, {"x": 753.45, "date": "Jul 17, 2026", "actual": 129.49, "synthetic": 140.05, "gap": -10.56}, {"x": 768.73, "date": "Jul 20, 2026", "actual": 118.71, "synthetic": 141.45, "gap": -22.74}, {"x": 773.82, "date": "Jul 21, 2026", "actual": 136.3, "synthetic": 151.93, "gap": -15.63}, {"x": 778.91, "date": "Jul 22, 2026", "actual": 131.46, "synthetic": 152.12, "gap": -20.66}, {"x": 784.0, "date": "Jul 23, 2026", "actual": 130.9, "synthetic": 152.31, "gap": -21.41}];
+</script>
+<script>window.__HOVER_DATA__ = HOVER_DATA_be_short_seller;</script>
+  </div>
+
+  <div class="card">
+    <h2>Fit quality</h2>
+    <div class="kv">
+      <div><span class="k">Fit-window RMSE</span>30.2984</div>
+      <div><span class="k">RMSE &divide; fit-window std dev</span>0.78&times;</div>
+      <div><span class="k">Fit-window days</span>89</div>
+      <div><span class="k">Confound-window mean gap</span>n/a (fit-end = treatment date)</div>
+      <div><span class="k">Post-period mean gap</span>-10.58</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Placebo test — same method run on every unit, treated one highlighted</h2>
+    
+<table class="placebo-table">
+  <thead><tr><th>Unit</th><th>Mean post-period gap</th><th>Max abs. gap</th></tr></thead>
+  <tbody><tr class=""><td>FCEL</td><td class="num">+111.70%</td><td class="num">148.81%</td></tr><tr class=""><td>PLUG</td><td class="num">-14.27%</td><td class="num">24.15%</td></tr><tr class="row-treated"><td>BE (treated)</td><td class="num">-10.58%</td><td class="num">22.74%</td></tr></tbody>
+</table>
+
+  </div>
+
+  <div class="card">
+    <h2>Verdict</h2>
+    <div class="verdict"><p><strong>Caution on fit quality:</strong> the fit-window RMSE is 0.78&times; this unit's own fit-window standard deviation — a loose fit. Treat the gap below as suggestive at best, not a clean read.</p>
+<p><strong>BE</strong>'s post-period gap ranks <strong>#3 of 3</strong> units by absolute size in the placebo test (larger rank = more likely a real, unit-specific effect rather than noise the method would produce for any random unit).</p>
+<p><strong>Read:</strong> this does NOT look like a clearly unit-specific effect — other units in the placebo test show gaps of similar or larger size, so this could just be estimation noise rather than a real, distinct move.</p></div>
+  </div>
+
+  <div class="footer">Generated 2026-07-27 07:38 UTC &middot; causal-toolkit &middot; synthetic control
+    (Abadie-Diamond-Hainmueller, outcome-only variant) &middot; donor pool hand-picked, not
+    algorithmically matched &middot; treat every result here as directional, not a p-value.</div>
+</div>
+<script>
+function onChartHover(evt) {
+  const svg = document.getElementById('chart-svg');
+  const pt = svg.createSVGPoint();
+  pt.x = evt.clientX; pt.y = evt.clientY;
+  const loc = pt.matrixTransform(svg.getScreenCTM().inverse());
+  const data = window.__HOVER_DATA__;
+  if (!data || !data.length) return;
+  let nearest = data[0], minDist = Infinity;
+  for (const d of data) {
+    const dist = Math.abs(d.x - loc.x);
+    if (dist < minDist) { minDist = dist; nearest = d; }
+  }
+  const crosshair = document.getElementById('crosshair');
+  crosshair.setAttribute('x1', nearest.x); crosshair.setAttribute('x2', nearest.x);
+  crosshair.style.display = 'block';
+  const tip = document.getElementById('chart-tooltip');
+  tip.style.display = 'block';
+  tip.style.left = (evt.pageX + 14) + 'px';
+  tip.style.top = (evt.pageY - 40) + 'px';
+  tip.innerHTML = `<div class="t-date">${nearest.date}</div>` +
+    `<div class="t-row"><span>Actual</span><strong>${nearest.actual.toFixed(2)}</strong></div>` +
+    `<div class="t-row"><span>Synthetic</span><strong>${nearest.synthetic.toFixed(2)}</strong></div>` +
+    `<div class="t-row"><span>Gap</span><strong>${nearest.gap >= 0 ? '+' : ''}${nearest.gap.toFixed(2)}</strong></div>`;
+}
+function onChartLeave() {
+  document.getElementById('crosshair').style.display = 'none';
+  document.getElementById('chart-tooltip').style.display = 'none';
+}
+</script>
+</body>
+</html>
