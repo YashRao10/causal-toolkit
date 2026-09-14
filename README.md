@@ -127,11 +127,22 @@ without actually checking it.
    similar or larger size, consistent with the whole hyperscaler group moving together on
    improving AI-monetization evidence that week rather than MSFT alone getting rewarded.
 
-_A planned 9th case (`ntap_ai_quarter_beat` — NetApp's Sep 11, 2026 AI-driven earnings beat
+9. **`mu_meta_compute_chip_glut_fear`** — did Micron's Jul 1, 2026 selloff (-10.6%) break it from
+   fellow AI-chip suppliers (AMD, NVDA, INTC), or hit the whole group? Meta announced "Meta
+   Compute" that day, a plan to resell its own excess AI infrastructure, which the market read
+   as a sign hyperscaler GPU demand might be peaking rather than perpetually scarce; chip
+   suppliers sold off hard (Philadelphia Semiconductor Index down over 10% across two sessions)
+   even as META itself rose ~9% on its own news. Different mechanism from
+   `sndk_supply_glut_fear` (that one was NAND/DRAM oversupply; this one is AI-chip demand-
+   destruction fear). **Good fit** (relative RMSE 0.35x) — MU ranks #2 of 4 in the placebo test,
+   reading as NOT a company-specific effect: the whole chip-supplier group re-priced together on
+   the same news, a clean confirmatory result unlike the SNDK case's inconclusive one.
+
+_A planned 10th case (`ntap_ai_quarter_beat` — NetApp's Sep 11, 2026 AI-driven earnings beat
 against the same storage/memory peer group as case 7, testing whether a genuine positive surprise
 fares differently from SNDK's fear-driven selloff) was **shelved before shipping**: the event is
-only 2 days old as of this writing and yfinance has zero trading days of post-treatment data yet
-(post-period gap computed as NaN). Revisit once at least a few trading days have passed._
+only a few days old as of this writing and yfinance has zero trading days of post-treatment data
+yet (post-period gap computed as NaN). Revisit once at least a few trading days have passed._
 
 ## Tests
 

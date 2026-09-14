@@ -178,4 +178,31 @@ CASE_STUDIES = {
         "fit_end": "2026-07-30",
         "pre_start": "2026-01-30",
     },
+    "mu_meta_compute_chip_glut_fear": {
+        "title": "Did Micron's Jul 1 'Meta Compute' selloff break it from fellow chip suppliers, or hit the whole group?",
+        "description": (
+            "Treated: MU. Donors: AMD, NVDA, INTC (AI/GPU-chip suppliers "
+            "facing the same demand-destruction read) — hand-picked, not "
+            "algorithmic. Treatment date is 2026-07-01: Meta announced 'Meta "
+            "Compute,' a plan to resell its own excess AI infrastructure "
+            "capacity, which the market read as evidence hyperscaler GPU "
+            "demand may be peaking rather than perpetually scarce. Chip "
+            "suppliers sold off hard the same day (MU -10.6%, AMD -6.9%, "
+            "NVDA -1.25%, the Philadelphia Semiconductor Index down over 10% "
+            "across the next two sessions), even as META itself rose about "
+            "9% on its own announcement — a genuine divergence between the "
+            "company making the move and the suppliers reading it as bad "
+            "news. This is a different mechanism from sndk_supply_glut_fear "
+            "(that one was about NAND/DRAM oversupply from Samsung/SK Hynix; "
+            "this one is about AI-chip demand destruction from a hyperscaler "
+            "reselling capacity instead of buying more). Tests whether MU's "
+            "outsized drop was company-specific or the whole chip-supplier "
+            "group re-priced together on the same news."
+        ),
+        "treated": "MU",
+        "donors": ["AMD", "NVDA", "INTC"],
+        "treatment_date": "2026-07-01",
+        "fit_end": "2026-07-01",
+        "pre_start": "2026-01-01",
+    },
 }
