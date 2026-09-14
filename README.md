@@ -118,6 +118,20 @@ without actually checking it.
    1.02×) — the donor pool cannot reconstruct SNDK's own 6-month pre-period path, so the post-
    period gap isn't trustworthy either way. Shipped as an honest negative result, same as the TSLA
    cases: no better-fitting donor pool was substituted in to force a cleaner-looking answer.
+8. **`msft_earnings_record_pop`** — mirror case of `googl_capex_guidance`: did MSFT's Jul 30, 2026
+   earnings report (Azure guidance beat, stock +16%, ~$450B added — the largest single-day
+   market-cap gain on record for any company) outpace fellow hyperscalers (GOOGL, META, AMZN), or
+   did the whole group re-rate on the same signal? **Loose fit** (relative RMSE 0.83×) — treat as
+   suggestive, not clean. MSFT's post-period gap ranks #2 of 4 in the placebo test, which does
+   **not** read as a clearly unit-specific effect: other units in the donor pool show gaps of
+   similar or larger size, consistent with the whole hyperscaler group moving together on
+   improving AI-monetization evidence that week rather than MSFT alone getting rewarded.
+
+_A planned 9th case (`ntap_ai_quarter_beat` — NetApp's Sep 11, 2026 AI-driven earnings beat
+against the same storage/memory peer group as case 7, testing whether a genuine positive surprise
+fares differently from SNDK's fear-driven selloff) was **shelved before shipping**: the event is
+only 2 days old as of this writing and yfinance has zero trading days of post-treatment data yet
+(post-period gap computed as NaN). Revisit once at least a few trading days have passed._
 
 ## Tests
 

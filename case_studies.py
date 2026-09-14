@@ -155,4 +155,27 @@ CASE_STUDIES = {
         "fit_end": "2026-07-02",
         "pre_start": "2026-01-02",
     },
+    "msft_earnings_record_pop": {
+        "title": "Did MSFT's record Jul 30 earnings pop outpace fellow hyperscalers, or did the whole group re-rate?",
+        "description": (
+            "Treated: MSFT. Donors: GOOGL, META, AMZN (fellow Mag-7 "
+            "hyperscalers, same donor logic as googl_capex_guidance) — hand-"
+            "picked, not algorithmic. Treatment date is MSFT's Jul 30 after-"
+            "close report: revenue +18% YoY to $90B, net income +31%, and "
+            "guidance for ~45% constant-currency Azure growth (vs. a 40.92% "
+            "estimate) — the stock closed up about 16%, adding nearly $450B "
+            "in market value, the largest single-day market-cap gain on "
+            "record for any company. This is the mirror case of "
+            "googl_capex_guidance: that one tested whether GOOGL's post-"
+            "guidance selloff eight days earlier (Jul 22) was company-"
+            "specific or a shared re-pricing; this tests the same question "
+            "on the opposite signal — a beat instead of a miss, in the same "
+            "hyperscaler group within the same two-week window."
+        ),
+        "treated": "MSFT",
+        "donors": ["GOOGL", "META", "AMZN"],
+        "treatment_date": "2026-07-30",
+        "fit_end": "2026-07-30",
+        "pre_start": "2026-01-30",
+    },
 }
