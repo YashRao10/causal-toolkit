@@ -129,4 +129,30 @@ CASE_STUDIES = {
         "fit_end": "2026-02-15",
         "pre_start": "2024-06-17",
     },
+    "sndk_supply_glut_fear": {
+        "title": "Did SanDisk's Jul 2 supply-glut selloff break it from its memory-chip peers?",
+        "description": (
+            "Treated: SNDK. Donors: WDC, MU, STX, NTAP (memory/storage peers "
+            "also riding the same 2026 AI-driven DRAM/NAND shortage supercycle "
+            "narrative) — hand-picked, not algorithmic. Treatment date is "
+            "2026-07-02, the day SNDK fell about 14% intraday (11% close to "
+            "close per same-day reporting) on Samsung/SK Hynix new-supply and "
+            "AI-capex-peak fears spreading across the whole memory complex. "
+            "This was the largest of several repeated 'supply glut fear' "
+            "selloffs in the group through Jul-Sep 2026 (further echoes hit "
+            "on 7/13, 7/29, 8/6, 8/18, and 9/10) — 7/2 was chosen as the "
+            "single cleanest, largest-magnitude catalyst date rather than "
+            "trying to model the whole multi-month sequence at once. Tests "
+            "whether SNDK's drop was company-specific or part of a shared "
+            "sector re-pricing that should also show up in WDC/MU/STX/NTAP, "
+            "against a backdrop where the underlying shortage thesis (DRAM/"
+            "NAND contract prices up 58-75% QoQ in Q2 2026) stayed intact "
+            "through the same window."
+        ),
+        "treated": "SNDK",
+        "donors": ["WDC", "MU", "STX", "NTAP"],
+        "treatment_date": "2026-07-02",
+        "fit_end": "2026-07-02",
+        "pre_start": "2026-01-02",
+    },
 }

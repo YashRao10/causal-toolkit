@@ -110,6 +110,14 @@ without actually checking it.
    have one clean, independently verifiable catalyst date). Result: XLU ranks **last** (#11 of
    11) in the placebo test — no distinctive Fed-pivot effect on Utilities shows up in this test,
    contradicting the textbook prior.
+7. **`sndk_supply_glut_fear`** — did SanDisk's Jul 2, 2026 supply-glut selloff (~14% intraday,
+   ~11% close to close) break it from its memory-chip peers (WDC, MU, STX, NTAP)? 7/2 was one of
+   several repeated "supply glut fear" selloffs that hit the group through Jul-Sep 2026 (further
+   echoes on 7/13, 7/29, 8/6, 8/18, 9/10) — chosen here as the largest single-day move rather than
+   modeling the whole multi-month sequence at once. **Fails the fit-quality gate** (relative RMSE
+   1.02×) — the donor pool cannot reconstruct SNDK's own 6-month pre-period path, so the post-
+   period gap isn't trustworthy either way. Shipped as an honest negative result, same as the TSLA
+   cases: no better-fitting donor pool was substituted in to force a cleaner-looking answer.
 
 ## Tests
 
