@@ -138,11 +138,14 @@ without actually checking it.
    reading as NOT a company-specific effect: the whole chip-supplier group re-priced together on
    the same news, a clean confirmatory result unlike the SNDK case's inconclusive one.
 
-_A planned 10th case (`ntap_ai_quarter_beat` — NetApp's Sep 11, 2026 AI-driven earnings beat
-against the same storage/memory peer group as case 7, testing whether a genuine positive surprise
-fares differently from SNDK's fear-driven selloff) was **shelved before shipping**: the event is
-only a few days old as of this writing and yfinance has zero trading days of post-treatment data
-yet (post-period gap computed as NaN). Revisit once at least a few trading days have passed._
+10. **`ntap_ai_quarter_beat`** — did NetApp's Sep 11, 2026 AI-driven earnings beat break it from
+    its storage/memory peers (WDC, MU, STX, SNDK)? Originally planned right after case 7 but
+    shelved at the time because yfinance had zero trading days of post-treatment data yet
+    (post-period gap computed as NaN). Revisited with a full week of post-earnings data.
+    **Fails the fit-quality gate** (relative RMSE 1.10x) — same outcome as
+    `sndk_supply_glut_fear` (1.02x): the donor pool cannot reconstruct NTAP's own pre-period path
+    either, so the post-period gap isn't trustworthy in either direction. Shipped as an honest
+    negative result rather than swapped for a better-fitting pool.
 
 ## Tests
 

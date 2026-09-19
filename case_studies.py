@@ -205,4 +205,30 @@ CASE_STUDIES = {
         "fit_end": "2026-07-01",
         "pre_start": "2026-01-01",
     },
+    "ntap_ai_quarter_beat": {
+        "title": "Did NetApp's Sep 11 AI-driven earnings beat break it from its storage/memory peers?",
+        "description": (
+            "Treated: NTAP. Donors: WDC, MU, STX, SNDK (same storage/memory peer "
+            "group as sndk_supply_glut_fear, with SNDK now a donor instead of a "
+            "peer input and NTAP promoted to treated) — hand-picked, not "
+            "algorithmic. Treatment date is NetApp's 2026-09-11 earnings report, "
+            "an AI-driven beat that pushed the stock as much as +11% intraday "
+            "before settling to a smaller close-to-close gain. This case was "
+            "originally planned right after sndk_supply_glut_fear but shelved: "
+            "as of that writing (a few days post-event) yfinance had zero "
+            "trading days of post-treatment data, so the post-period gap "
+            "computed as NaN. Revisited here with a full week of post-earnings "
+            "data available. **Fails the fit-quality gate** (relative RMSE "
+            "1.10x) — same outcome as sndk_supply_glut_fear (1.02x): this "
+            "donor pool cannot reconstruct NTAP's own pre-period path either, "
+            "so the post-period gap isn't trustworthy in either direction. "
+            "Shipped as an honest negative result rather than swapped for a "
+            "better-fitting pool to force a cleaner-looking answer."
+        ),
+        "treated": "NTAP",
+        "donors": ["WDC", "MU", "STX", "SNDK"],
+        "treatment_date": "2026-09-11",
+        "fit_end": "2026-09-11",
+        "pre_start": "2026-03-11",
+    },
 }
