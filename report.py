@@ -270,7 +270,7 @@ PAGE_TEMPLATE = """<!doctype html>
   </div>
 
   <div class="card">
-    <h2>Placebo test — same method run on every unit, treated one highlighted</h2>
+    <h2>Placebo test: same method run on every unit, treated one highlighted</h2>
     {placebo_table}
   </div>
 

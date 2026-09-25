@@ -1,10 +1,10 @@
 {
   "key": "fed_pivot_tech",
   "title": "Did the June 2026 Fed hawkish pivot actually move Tech?",
-  "description": "Validation case \u2014 reproduces the original one-off script's finding. Confirms the generalized toolkit recovers the same (honest, negative) result: XLK's gap vs. its synthetic counterfactual opened up months before the June 17 FOMC meeting, so the pivot itself can't cleanly take credit for it.",
+  "description": "Validation case: reproduces the original one-off script's finding. Confirms the generalized toolkit recovers the same (honest, negative) result: XLK's gap vs. its synthetic counterfactual opened up months before the June 17 FOMC meeting, so the pivot itself can't cleanly take credit for it.",
   "treated": "XLK",
-  "generated_at": "2026-07-27 07:38 UTC",
-  "generated_at_iso": "2026-07-27T07:38:23.123489+00:00",
+  "generated_at": "2026-09-25 06:53 UTC",
+  "generated_at_iso": "2026-09-25T06:53:36.356433+00:00",
   "badge_class": "loose-fit",
-  "badge_label": "Loose fit \u2014 suggestive at best"
+  "badge_label": "Loose fit (suggestive at best)"
 }

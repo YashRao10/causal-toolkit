@@ -57,7 +57,7 @@ def _write_verdict(
         parts.append(
             f"<p><strong>Do not trust the gap below.</strong> The fit-window RMSE is "
             f"<strong>{relative_rmse:.2f}&times;</strong> this unit's own fit-window standard "
-            f"deviation — the donor pool literally cannot reconstruct {treated}'s pre-period "
+            f"deviation: the donor pool literally cannot reconstruct {treated}'s pre-period "
             f"path at all, which usually means the donor pool is the wrong choice for this "
             f"unit (e.g. {treated} moved for reasons entirely disconnected from the donors' own "
             f"drivers), not that a real effect was found. Pick a different/better-correlated "
@@ -67,7 +67,7 @@ def _write_verdict(
     elif relative_rmse > 0.5:
         parts.append(
             f"<p><strong>Caution on fit quality:</strong> the fit-window RMSE is "
-            f"{relative_rmse:.2f}&times; this unit's own fit-window standard deviation — a loose "
+            f"{relative_rmse:.2f}&times; this unit's own fit-window standard deviation, a loose "
             f"fit. Treat the gap below as suggestive at best, not a clean read.</p>"
         )
 
@@ -81,25 +81,25 @@ def _write_verdict(
         if abs(confound_gap) > abs(post_gap) * 0.25:
             parts.append(
                 f"<p><strong>Caution:</strong> the confound-window gap ({confound_gap:+.2f}) is "
-                f"already a substantial fraction of the post-period gap ({post_gap:+.2f}) — this "
+                f"already a substantial fraction of the post-period gap ({post_gap:+.2f}); this "
                 f"divergence looks like it was emerging <em>before</em> the treatment date, so the "
                 f"treatment can't cleanly take full credit for the post-period gap.</p>"
             )
         else:
             parts.append(
                 f"<p>The confound-window gap ({confound_gap:+.2f}) is small relative to the "
-                f"post-period gap ({post_gap:+.2f}) — the divergence looks genuinely tied to the "
+                f"post-period gap ({post_gap:+.2f}): the divergence looks genuinely tied to the "
                 f"treatment date, not a pre-existing trend.</p>"
             )
     if rank <= max(1, n_units // 3):
         parts.append(
-            "<p><strong>Read:</strong> this looks like a real, unit-specific effect — the gap this "
+            "<p><strong>Read:</strong> this looks like a real, unit-specific effect; the gap this "
             "method finds for the treated unit is larger than what it produces when re-run on most "
             "other units in the donor pool.</p>"
         )
     else:
         parts.append(
-            "<p><strong>Read:</strong> this does NOT look like a clearly unit-specific effect — "
+            "<p><strong>Read:</strong> this does NOT look like a clearly unit-specific effect; "
             "other units in the placebo test show gaps of similar or larger size, so this could "
             "just be estimation noise rather than a real, distinct move.</p>"
         )
@@ -111,7 +111,7 @@ def _verdict_headline(relative_rmse: float, rank: int, n_units: int) -> tuple[st
     if relative_rmse > 1.0:
         return "bad-fit", "Fit too poor to trust"
     if relative_rmse > 0.5:
-        return "loose-fit", "Loose fit — suggestive at best"
+        return "loose-fit", "Loose fit (suggestive at best)"
     if rank <= max(1, n_units // 3):
         return "real-effect", "Real, unit-specific effect"
     return "no-effect", "Not a clear unit-specific effect"

@@ -21,7 +21,7 @@ PAGE_TEMPLATE = """<!doctype html>
 <html lang="en" data-theme="dark">
 <head>
 <meta charset="utf-8">
-<title>Causal Toolkit — Case Studies</title>
+<title>Causal Toolkit: Case Studies</title>
 <style>
   body {{
     margin:0; font-family: system-ui,-apple-system,"Segoe UI",sans-serif;
@@ -54,7 +54,7 @@ PAGE_TEMPLATE = """<!doctype html>
 </head>
 <body>
 <div class="wrap">
-  <h1>Causal Toolkit — Case Studies</h1>
+  <h1>Causal Toolkit: Case Studies</h1>
   <div class="subtitle">Synthetic-control tests, newest first. Click through for the full
     chart, fit-quality check, placebo test, and verdict.</div>
   <h2 class="section-label">Case Studies</h2>

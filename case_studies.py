@@ -11,7 +11,7 @@ CASE_STUDIES = {
     "fed_pivot_tech": {
         "title": "Did the June 2026 Fed hawkish pivot actually move Tech?",
         "description": (
-            "Validation case — reproduces the original one-off script's "
+            "Validation case: reproduces the original one-off script's "
             "finding. Confirms the generalized toolkit "
             "recovers the same (honest, negative) result: XLK's gap vs. its "
             "synthetic counterfactual opened up months before the June 17 FOMC "
@@ -26,15 +26,15 @@ CASE_STUDIES = {
     "be_short_seller": {
         "title": "Did Bloom Energy's Hunterbrook short-seller report break it from clean-energy peers?",
         "description": (
-            "Treated: BE. Donors: FCEL, PLUG (fuel-cell/clean-hydrogen peers) — "
-            "a hand-picked peer group, not an algorithmic match. Treatment date "
+            "Treated: BE. Donors: FCEL, PLUG (fuel-cell/clean-hydrogen peers). "
+            "A hand-picked peer group, not an algorithmic match. Treatment date "
             "is the Hunterbrook Capital report (2026-07-08). Tests whether BE's "
             "decline is company-specific (a real post-treatment gap vs. peers) "
             "or just riding the same clean-energy/rate-sensitive-growth wave "
             "FCEL and PLUG were already on. Pre-period deliberately short "
             "(~4 months, not 2 years): BE's own multi-year rally is so much "
             "larger than FCEL/PLUG's that a long window makes the donor pool "
-            "unusable (see README) — a short window centered on BE's recent "
+            "unusable (see README). A short window centered on BE's recent "
             "behavior is the standard fix when the treated unit has a strong "
             "idiosyncratic long-run trend."
         ),
@@ -47,14 +47,14 @@ CASE_STUDIES = {
     "tsla_earnings_miss_auto_peers": {
         "title": "Did TSLA's Jul 22 earnings miss actually break it from auto/EV peers?",
         "description": (
-            "Treated: TSLA. Donors: F, GM, RIVN (traditional + EV auto peers) — "
-            "hand-picked, not algorithmic. Treatment date is the Jul 22 earnings "
+            "Treated: TSLA. Donors: F, GM, RIVN (traditional + EV auto peers). "
+            "Hand-picked, not algorithmic. Treatment date is the Jul 22 earnings "
             "report (auto gross margins 16.3% vs 18.4% expected, EPS $0.33 vs "
             "$0.55 consensus, FCF went negative on AI/robotics capex). Tests "
             "whether the post-earnings selloff is a real, company-specific "
             "fundamentals break from the auto sector, or whether TSLA was "
             "already diverging from these peers beforehand for unrelated "
-            "reasons. Result: fails the fit-quality gate — see "
+            "reasons. Result: fails the fit-quality gate. See "
             "tsla_earnings_miss_growth_peers for the follow-up with a "
             "different donor pool."
         ),
@@ -68,7 +68,7 @@ CASE_STUDIES = {
         "title": "TSLA's Jul 22 earnings miss, re-tested against high-beta growth peers instead of automakers",
         "description": (
             "Follow-up to tsla_earnings_miss_auto_peers, which failed the "
-            "fit-quality gate — pure Detroit automakers (F, GM) don't move "
+            "fit-quality gate: pure Detroit automakers (F, GM) don't move "
             "with TSLA day-to-day at all. Treated: TSLA. Donors: RIVN, LCID "
             "(EV-specific, still auto but more growth-multiple-priced than "
             "F/GM), PLTR, COIN (retail-favorite high-beta momentum names with "
@@ -76,12 +76,12 @@ CASE_STUDIES = {
             "more on 'high-beta retail-momentum growth' factor exposure than "
             "on 'automaker' exposure most days). Same Jul 22 earnings-miss "
             "treatment date. Result: improved (relative RMSE 1.29x, down from "
-            "1.78x with pure automakers) but still fails the fit-quality gate "
-            "— TSLA doesn't reconstruct cleanly from either peer group tried "
+            "1.78x with pure automakers) but still fails the fit-quality gate. "
+            "TSLA doesn't reconstruct cleanly from either peer group tried "
             "so far. Read as: TSLA is genuinely idiosyncratic (Musk/narrative "
             "-driven) rather than a donor-pool-selection failure specifically "
-            "— a case where the honest answer is 'this method can't cleanly "
-            "isolate an effect here,' not a forced conclusion either way."
+            "(a case where the honest answer is 'this method can't cleanly "
+            "isolate an effect here,' not a forced conclusion either way)."
         ),
         "treated": "TSLA",
         "donors": ["RIVN", "LCID", "PLTR", "COIN"],
@@ -94,7 +94,7 @@ CASE_STUDIES = {
         "description": (
             "Treated: GOOGL. Donors: MSFT, META, AMZN (fellow Mag-7 "
             "hyperscalers, all running their own large AI-capex programs and "
-            "facing similar market scrutiny over it) — hand-picked, not "
+            "facing similar market scrutiny over it). Hand-picked, not "
             "algorithmic. Treatment date is GOOGL's Jul 22 after-close report: "
             "Cloud grew 63% YoY, a strong number, but $190B capex guidance "
             "crushed the FCF margin (21%→10, from 21%→9.2% per prior "
@@ -114,12 +114,12 @@ CASE_STUDIES = {
         "description": (
             "Reuses the exact same validated event/date as fed_pivot_tech, "
             "swapping the treated unit to XLU. Utilities are the textbook "
-            "bond-proxy, rate-sensitive sector — this checks whether that "
+            "bond-proxy, rate-sensitive sector: this checks whether that "
             "theory actually shows up as a real synthetic-control gap, using "
             "the other 10 sectors as donors, or whether XLU just moved with "
             "the broader market like everything else that week. (Substituted "
             "for a literal single-day 'AI-datacenter-power' event test since "
-            "that theme doesn't have one clean, verifiable catalyst date — "
+            "that theme doesn't have one clean, verifiable catalyst date; "
             "this is the more rigorously anchored version of 'is XLU moving "
             "for a distinct reason.')"
         ),

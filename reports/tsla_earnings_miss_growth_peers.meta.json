@@ -1,10 +1,10 @@
 {
   "key": "tsla_earnings_miss_growth_peers",
   "title": "TSLA's Jul 22 earnings miss, re-tested against high-beta growth peers instead of automakers",
-  "description": "Follow-up to tsla_earnings_miss_auto_peers, which failed the fit-quality gate \u2014 pure Detroit automakers (F, GM) don't move with TSLA day-to-day at all. Treated: TSLA. Donors: RIVN, LCID (EV-specific, still auto but more growth-multiple-priced than F/GM), PLTR, COIN (retail-favorite high-beta momentum names with no automotive exposure, included on the theory that TSLA trades more on 'high-beta retail-momentum growth' factor exposure than on 'automaker' exposure most days). Same Jul 22 earnings-miss treatment date. Result: improved (relative RMSE 1.29x, down from 1.78x with pure automakers) but still fails the fit-quality gate \u2014 TSLA doesn't reconstruct cleanly from either peer group tried so far. Read as: TSLA is genuinely idiosyncratic (Musk/narrative -driven) rather than a donor-pool-selection failure specifically \u2014 a case where the honest answer is 'this method can't cleanly isolate an effect here,' not a forced conclusion either way.",
+  "description": "Follow-up to tsla_earnings_miss_auto_peers, which failed the fit-quality gate: pure Detroit automakers (F, GM) don't move with TSLA day-to-day at all. Treated: TSLA. Donors: RIVN, LCID (EV-specific, still auto but more growth-multiple-priced than F/GM), PLTR, COIN (retail-favorite high-beta momentum names with no automotive exposure, included on the theory that TSLA trades more on 'high-beta retail-momentum growth' factor exposure than on 'automaker' exposure most days). Same Jul 22 earnings-miss treatment date. Result: improved (relative RMSE 1.29x, down from 1.78x with pure automakers) but still fails the fit-quality gate. TSLA doesn't reconstruct cleanly from either peer group tried so far. Read as: TSLA is genuinely idiosyncratic (Musk/narrative -driven) rather than a donor-pool-selection failure specifically (a case where the honest answer is 'this method can't cleanly isolate an effect here,' not a forced conclusion either way).",
   "treated": "TSLA",
-  "generated_at": "2026-07-27 07:38 UTC",
-  "generated_at_iso": "2026-07-27T07:38:25.454137+00:00",
+  "generated_at": "2026-09-25 06:53 UTC",
+  "generated_at_iso": "2026-09-25T06:53:39.016369+00:00",
   "badge_class": "bad-fit",
   "badge_label": "Fit too poor to trust"
 }

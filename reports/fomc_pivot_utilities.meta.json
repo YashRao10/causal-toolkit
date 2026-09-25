@@ -1,10 +1,10 @@
 {
   "key": "fomc_pivot_utilities",
   "title": "Did the same June 2026 FOMC pivot move Utilities the way classic rate-sensitivity theory predicts?",
-  "description": "Reuses the exact same validated event/date as fed_pivot_tech, swapping the treated unit to XLU. Utilities are the textbook bond-proxy, rate-sensitive sector \u2014 this checks whether that theory actually shows up as a real synthetic-control gap, using the other 10 sectors as donors, or whether XLU just moved with the broader market like everything else that week. (Substituted for a literal single-day 'AI-datacenter-power' event test since that theme doesn't have one clean, verifiable catalyst date \u2014 this is the more rigorously anchored version of 'is XLU moving for a distinct reason.')",
+  "description": "Reuses the exact same validated event/date as fed_pivot_tech, swapping the treated unit to XLU. Utilities are the textbook bond-proxy, rate-sensitive sector: this checks whether that theory actually shows up as a real synthetic-control gap, using the other 10 sectors as donors, or whether XLU just moved with the broader market like everything else that week. (Substituted for a literal single-day 'AI-datacenter-power' event test since that theme doesn't have one clean, verifiable catalyst date; this is the more rigorously anchored version of 'is XLU moving for a distinct reason.')",
   "treated": "XLU",
-  "generated_at": "2026-07-27 07:38 UTC",
-  "generated_at_iso": "2026-07-27T07:38:28.913558+00:00",
+  "generated_at": "2026-09-25 06:53 UTC",
+  "generated_at_iso": "2026-09-25T06:53:43.058931+00:00",
   "badge_class": "no-effect",
   "badge_label": "Not a clear unit-specific effect"
 }
