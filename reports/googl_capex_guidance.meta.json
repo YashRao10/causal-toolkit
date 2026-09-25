@@ -3,8 +3,8 @@
   "title": "Did GOOGL's Jul 22 capex-guidance selloff break it from fellow hyperscalers?",
   "description": "Treated: GOOGL. Donors: MSFT, META, AMZN (fellow Mag-7 hyperscalers, all running their own large AI-capex programs and facing similar market scrutiny over it). Hand-picked, not algorithmic. Treatment date is GOOGL's Jul 22 after-close report: Cloud grew 63% YoY, a strong number, but $190B capex guidance crushed the FCF margin (21%\u219210, from 21%\u21929.2% per prior notes) and the stock sold off anyway. Tests whether this was a GOOGL-specific reaction to its own guidance, or part of a shared 'market re-pricing hyperscaler AI-capex risk' move that should also show up in the donor pool.",
   "treated": "GOOGL",
-  "generated_at": "2026-09-25 06:53 UTC",
-  "generated_at_iso": "2026-09-25T06:53:39.787613+00:00",
+  "generated_at": "2026-09-25 06:55 UTC",
+  "generated_at_iso": "2026-09-25T06:55:52.383559+00:00",
   "badge_class": "no-effect",
   "badge_label": "Not a clear unit-specific effect"
 }

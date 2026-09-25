@@ -1,10 +1,10 @@
 {
   "key": "msft_earnings_record_pop",
   "title": "Did MSFT's record Jul 30 earnings pop outpace fellow hyperscalers, or did the whole group re-rate?",
-  "description": "Treated: MSFT. Donors: GOOGL, META, AMZN (fellow Mag-7 hyperscalers, same donor logic as googl_capex_guidance) \u2014 hand-picked, not algorithmic. Treatment date is MSFT's Jul 30 after-close report: revenue +18% YoY to $90B, net income +31%, and guidance for ~45% constant-currency Azure growth (vs. a 40.92% estimate) \u2014 the stock closed up about 16%, adding nearly $450B in market value, the largest single-day market-cap gain on record for any company. This is the mirror case of googl_capex_guidance: that one tested whether GOOGL's post-guidance selloff eight days earlier (Jul 22) was company-specific or a shared re-pricing; this tests the same question on the opposite signal \u2014 a beat instead of a miss, in the same hyperscaler group within the same two-week window.",
+  "description": "Treated: MSFT. Donors: GOOGL, META, AMZN (fellow Mag-7 hyperscalers, same donor logic as googl_capex_guidance). Hand-picked, not algorithmic. Treatment date is MSFT's Jul 30 after-close report: revenue +18% YoY to $90B, net income +31%, and guidance for ~45% constant-currency Azure growth (vs. a 40.92% estimate); the stock closed up about 16%, adding nearly $450B in market value, the largest single-day market-cap gain on record for any company. This is the mirror case of googl_capex_guidance: that one tested whether GOOGL's post-guidance selloff eight days earlier (Jul 22) was company-specific or a shared re-pricing; this tests the same question on the opposite signal (a beat instead of a miss), in the same hyperscaler group within the same two-week window.",
   "treated": "MSFT",
-  "generated_at": "2026-09-14 04:19 UTC",
-  "generated_at_iso": "2026-09-14T04:19:50.561184+00:00",
+  "generated_at": "2026-09-25 06:55 UTC",
+  "generated_at_iso": "2026-09-25T06:55:58.054216+00:00",
   "badge_class": "loose-fit",
-  "badge_label": "Loose fit \u2014 suggestive at best"
+  "badge_label": "Loose fit (suggestive at best)"
 }

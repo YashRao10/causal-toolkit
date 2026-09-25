@@ -134,13 +134,13 @@ CASE_STUDIES = {
         "description": (
             "Treated: SNDK. Donors: WDC, MU, STX, NTAP (memory/storage peers "
             "also riding the same 2026 AI-driven DRAM/NAND shortage supercycle "
-            "narrative) — hand-picked, not algorithmic. Treatment date is "
+            "narrative). Hand-picked, not algorithmic. Treatment date is "
             "2026-07-02, the day SNDK fell about 14% intraday (11% close to "
             "close per same-day reporting) on Samsung/SK Hynix new-supply and "
             "AI-capex-peak fears spreading across the whole memory complex. "
             "This was the largest of several repeated 'supply glut fear' "
             "selloffs in the group through Jul-Sep 2026 (further echoes hit "
-            "on 7/13, 7/29, 8/6, 8/18, and 9/10) — 7/2 was chosen as the "
+            "on 7/13, 7/29, 8/6, 8/18, and 9/10); 7/2 was chosen as the "
             "single cleanest, largest-magnitude catalyst date rather than "
             "trying to model the whole multi-month sequence at once. Tests "
             "whether SNDK's drop was company-specific or part of a shared "
@@ -159,17 +159,17 @@ CASE_STUDIES = {
         "title": "Did MSFT's record Jul 30 earnings pop outpace fellow hyperscalers, or did the whole group re-rate?",
         "description": (
             "Treated: MSFT. Donors: GOOGL, META, AMZN (fellow Mag-7 "
-            "hyperscalers, same donor logic as googl_capex_guidance) — hand-"
+            "hyperscalers, same donor logic as googl_capex_guidance). Hand-"
             "picked, not algorithmic. Treatment date is MSFT's Jul 30 after-"
             "close report: revenue +18% YoY to $90B, net income +31%, and "
             "guidance for ~45% constant-currency Azure growth (vs. a 40.92% "
-            "estimate) — the stock closed up about 16%, adding nearly $450B "
+            "estimate); the stock closed up about 16%, adding nearly $450B "
             "in market value, the largest single-day market-cap gain on "
             "record for any company. This is the mirror case of "
             "googl_capex_guidance: that one tested whether GOOGL's post-"
             "guidance selloff eight days earlier (Jul 22) was company-"
             "specific or a shared re-pricing; this tests the same question "
-            "on the opposite signal — a beat instead of a miss, in the same "
+            "on the opposite signal (a beat instead of a miss), in the same "
             "hyperscaler group within the same two-week window."
         ),
         "treated": "MSFT",
@@ -182,7 +182,7 @@ CASE_STUDIES = {
         "title": "Did Micron's Jul 1 'Meta Compute' selloff break it from fellow chip suppliers, or hit the whole group?",
         "description": (
             "Treated: MU. Donors: AMD, NVDA, INTC (AI/GPU-chip suppliers "
-            "facing the same demand-destruction read) — hand-picked, not "
+            "facing the same demand-destruction read). Hand-picked, not "
             "algorithmic. Treatment date is 2026-07-01: Meta announced 'Meta "
             "Compute,' a plan to resell its own excess AI infrastructure "
             "capacity, which the market read as evidence hyperscaler GPU "
@@ -190,7 +190,7 @@ CASE_STUDIES = {
             "suppliers sold off hard the same day (MU -10.6%, AMD -6.9%, "
             "NVDA -1.25%, the Philadelphia Semiconductor Index down over 10% "
             "across the next two sessions), even as META itself rose about "
-            "9% on its own announcement — a genuine divergence between the "
+            "9% on its own announcement: a genuine divergence between the "
             "company making the move and the suppliers reading it as bad "
             "news. This is a different mechanism from sndk_supply_glut_fear "
             "(that one was about NAND/DRAM oversupply from Samsung/SK Hynix; "
@@ -210,7 +210,7 @@ CASE_STUDIES = {
         "description": (
             "Treated: NTAP. Donors: WDC, MU, STX, SNDK (same storage/memory peer "
             "group as sndk_supply_glut_fear, with SNDK now a donor instead of a "
-            "peer input and NTAP promoted to treated) — hand-picked, not "
+            "peer input and NTAP promoted to treated). Hand-picked, not "
             "algorithmic. Treatment date is NetApp's 2026-09-11 earnings report, "
             "an AI-driven beat that pushed the stock as much as +11% intraday "
             "before settling to a smaller close-to-close gain. This case was "
@@ -219,7 +219,7 @@ CASE_STUDIES = {
             "trading days of post-treatment data, so the post-period gap "
             "computed as NaN. Revisited here with a full week of post-earnings "
             "data available. **Fails the fit-quality gate** (relative RMSE "
-            "1.10x) — same outcome as sndk_supply_glut_fear (1.02x): this "
+            "1.10x); same outcome as sndk_supply_glut_fear (1.02x): this "
             "donor pool cannot reconstruct NTAP's own pre-period path either, "
             "so the post-period gap isn't trustworthy in either direction. "
             "Shipped as an honest negative result rather than swapped for a "

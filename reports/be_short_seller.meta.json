@@ -3,8 +3,8 @@
   "title": "Did Bloom Energy's Hunterbrook short-seller report break it from clean-energy peers?",
   "description": "Treated: BE. Donors: FCEL, PLUG (fuel-cell/clean-hydrogen peers). A hand-picked peer group, not an algorithmic match. Treatment date is the Hunterbrook Capital report (2026-07-08). Tests whether BE's decline is company-specific (a real post-treatment gap vs. peers) or just riding the same clean-energy/rate-sensitive-growth wave FCEL and PLUG were already on. Pre-period deliberately short (~4 months, not 2 years): BE's own multi-year rally is so much larger than FCEL/PLUG's that a long window makes the donor pool unusable (see README). A short window centered on BE's recent behavior is the standard fix when the treated unit has a strong idiosyncratic long-run trend.",
   "treated": "BE",
-  "generated_at": "2026-09-25 06:53 UTC",
-  "generated_at_iso": "2026-09-25T06:53:36.627946+00:00",
+  "generated_at": "2026-09-25 06:55 UTC",
+  "generated_at_iso": "2026-09-25T06:55:48.125021+00:00",
   "badge_class": "loose-fit",
   "badge_label": "Loose fit (suggestive at best)"
 }
